@@ -10,11 +10,13 @@
     
     <style>
         :root {
-            --kfc-red: #e41e26;
-            --kfc-dark: #111111;
-            --bg-gray: #f4f5f7;
+            --brand-red: #e41e26;
+            --brand-green-dark: #082416; /* اللون الأخضر الغامق الفاخر للملفية */
+            --brand-green-card: #0d3421; /* لون البطاقات المندمجة */
             --white: #ffffff;
-            --text-gray: #6b7280;
+            --text-light: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-gold: #facc15;
         }
 
         * {
@@ -26,19 +28,19 @@
         }
 
         body {
-            background-color: var(--bg-gray);
-            color: var(--kfc-dark);
+            background-color: var(--brand-green-dark);
+            color: var(--white);
             padding-bottom: 90px;
         }
 
         /* شريط الموقع العلوي */
         .top-location-bar {
-            background: var(--white);
+            background: var(--brand-green-card);
             padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
         .location-info {
             display: flex;
@@ -47,11 +49,11 @@
             font-size: 13px;
             font-weight: 700;
         }
-        .location-info span { color: var(--text-gray); font-weight: 500; }
+        .location-info span { color: var(--text-muted); font-weight: 500; }
         
         .change-loc-btn {
-            background: #eef2f6;
-            color: #007aff;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-gold);
             border: none;
             padding: 4px 12px;
             border-radius: 12px;
@@ -63,30 +65,31 @@
         /* هيدر المطعم */
         .brand-header {
             text-align: center;
-            padding: 15px 15px 5px 15px;
-            background: var(--white);
+            padding: 20px 15px 10px 15px;
+            background: var(--brand-green-dark);
         }
-        .brand-header h1 { font-size: 22px; font-weight: 900; color: var(--kfc-dark); }
-        .brand-header p { font-size: 13px; color: var(--text-gray); margin-bottom: 6px; }
+        .brand-header h1 { font-size: 24px; font-weight: 900; color: var(--accent-gold); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .brand-header p { font-size: 13px; color: var(--text-light); margin-bottom: 8px; opacity: 0.9; }
         .brand-phones {
-            background: var(--kfc-red);
+            background: var(--brand-red);
             color: var(--white);
             display: inline-block;
-            padding: 4px 14px;
+            padding: 4px 16px;
             border-radius: 15px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
             direction: ltr;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
         }
 
         /* خيارات استلام الطلب */
         .order-modes-scroller {
             display: flex;
-            gap: 16px;
-            padding: 12px 16px;
+            gap: 20px;
+            padding: 15px 16px;
             justify-content: center;
-            background: var(--white);
-            border-bottom: 1px solid #f0f0f0;
+            background: var(--brand-green-card);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         
         .mode-pill {
@@ -99,62 +102,62 @@
             border: none;
         }
         .mode-icon-circle {
-            width: 52px;
-            height: 52px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
-            background: #f3f4f6;
+            background: rgba(255,255,255,0.05);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 24px;
             border: 2px solid transparent;
             transition: all 0.2s ease;
         }
         .mode-pill.active .mode-icon-circle {
-            border-color: var(--kfc-red);
-            background: #fff5f5;
-            box-shadow: 0 4px 10px rgba(228, 30, 38, 0.15);
+            border-color: var(--accent-gold);
+            background: rgba(250, 204, 21, 0.15);
+            box-shadow: 0 4px 12px rgba(250, 204, 21, 0.2);
         }
         .mode-title {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
-            color: var(--text-gray);
+            color: var(--text-muted);
         }
         .mode-pill.active .mode-title {
-            color: var(--kfc-red);
+            color: var(--accent-gold);
             font-weight: 900;
         }
 
         .container { padding: 0 16px; max-width: 600px; margin: 0 auto; }
 
         /* عناوين الأقسام */
-        .section-header { margin: 20px 0 12px 0; }
-        .section-title { font-size: 16px; font-weight: 900; position: relative; padding-bottom: 4px; }
+        .section-header { margin: 25px 0 15px 0; }
+        .section-title { font-size: 18px; font-weight: 900; position: relative; padding-bottom: 6px; color: var(--white); }
         .section-title::after {
             content: '';
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 30px;
+            width: 40px;
             height: 3px;
-            background: var(--kfc-red);
+            background: var(--accent-gold);
             border-radius: 2px;
         }
 
-        /* شبكة الأقسام المتطابقة (3 أعمدة حقيقية وكاملة الاستجابة) */
+        /* شبكة الأقسام المتطابقة (3 أعمدة بدقة) */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
         .kfc-category-card {
-            background: var(--white);
+            background: var(--brand-green-card);
             border-radius: 16px;
             overflow: hidden;
             position: relative;
             aspect-ratio: 1 / 1;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.05);
             cursor: pointer;
             -webkit-user-select: none;
             user-select: none;
@@ -172,148 +175,150 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 65%;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
+            height: 70%;
+            background: linear-gradient(to top, rgba(4,18,11,0.95) 0%, rgba(4,18,11,0.4) 60%, rgba(0,0,0,0) 100%);
         }
         .kfc-category-title {
             position: absolute;
-            bottom: 8px;
+            bottom: 10px;
             right: 4px;
             left: 4px;
             color: var(--white);
-            font-size: 11px;
+            font-size: 11.5px;
             font-weight: 700;
             text-align: center;
             z-index: 2;
             line-height: 1.3;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
         /* صفحة عرض المنتجات المنفصلة */
-        .page-header-container { display: flex; align-items: center; gap: 12px; margin: 15px 0; }
+        .page-header-container { display: flex; align-items: center; gap: 12px; margin: 20px 0; }
         .back-circle-btn {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background: var(--white);
-            border: 1px solid #e5e7eb;
+            background: var(--brand-green-card);
+            border: 1px solid rgba(255,255,255,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             font-weight: bold;
             font-size: 16px;
-            color: var(--kfc-red);
+            color: var(--accent-gold);
         }
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .product-card {
-            background: var(--white);
+            background: var(--brand-green-card);
             border-radius: 16px;
-            padding: 10px;
-            border: 1px solid #f0f0f0;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
         .prod-img-box {
             width: 100%;
-            height: 110px;
+            height: 115px;
             border-radius: 10px;
             overflow: hidden;
-            background: #f9fafb;
-            margin-bottom: 6px;
+            background: rgba(0,0,0,0.2);
+            margin-bottom: 8px;
         }
         .prod-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .prod-title { font-size: 13px; font-weight: 700; min-height: 38px; line-height: 1.4; color: var(--kfc-dark); }
-        .prod-price { color: var(--kfc-red); font-weight: 900; font-size: 14px; margin: 4px 0; }
+        .prod-title { font-size: 13.5px; font-weight: 700; min-height: 38px; line-height: 1.4; color: var(--white); }
+        .prod-price { color: var(--accent-gold); font-weight: 900; font-size: 15px; margin: 6px 0; }
         
         .add-to-cart-btn {
-            background: #fff1f2;
-            color: var(--kfc-red);
-            border: 1px solid #fecdd3;
-            padding: 8px 6px;
+            background: var(--brand-red);
+            color: var(--white);
+            border: none;
+            padding: 9px 6px;
             border-radius: 8px;
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 700;
             cursor: pointer;
             width: 100%;
+            box-shadow: 0 2px 5px rgba(228,30,38,0.3);
         }
-        .add-to-cart-btn:hover { background: var(--kfc-red); color: white; }
+        .add-to-cart-btn:active { background: #b8141a; }
 
         /* صفحة السلة والدفع */
-        .cart-title-main { font-size: 16px; font-weight: 900; margin: 15px 0; }
+        .cart-title-main { font-size: 18px; font-weight: 900; margin: 20px 0; color: var(--accent-gold); }
         .cart-item-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--white);
-            padding: 12px;
+            background: var(--brand-green-card);
+            padding: 14px;
             border-radius: 12px;
-            margin-bottom: 8px;
-            border: 1px solid #eaeaea;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .cart-item-info h4 { font-size: 13px; font-weight: 700; }
-        .cart-item-info span { color: var(--kfc-red); font-weight: 800; font-size: 13px; }
-        .remove-btn { color: #ef4444; font-weight: 800; cursor: pointer; font-size: 14px; padding: 4px; }
+        .cart-item-info h4 { font-size: 14px; font-weight: 700; color: var(--white); }
+        .cart-item-info span { color: var(--accent-gold); font-weight: 800; font-size: 14px; }
+        .remove-btn { color: #f87171; font-weight: 800; cursor: pointer; font-size: 15px; padding: 4px; }
         
         .summary-card {
-            background: var(--white);
+            background: var(--brand-green-card);
             border-radius: 16px;
             padding: 16px;
-            margin: 15px 0;
-            border: 1px solid #e5e7eb;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .summary-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; color: #4b5563; }
-        .summary-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 900; color: var(--kfc-red); padding-top: 8px; border-top: 1px dashed #e5e7eb; }
+        .summary-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 10px; color: var(--text-light); }
+        .summary-total { display: flex; justify-content: space-between; font-size: 17px; font-weight: 900; color: var(--accent-gold); padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.15); }
 
         .form-card {
-            background: var(--white);
+            background: var(--brand-green-card);
             border-radius: 16px;
             padding: 16px;
-            border: 1px solid #e5e7eb;
-            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 25px;
         }
-        .form-card h4 { font-size: 14px; font-weight: 800; margin-bottom: 12px; color: var(--kfc-dark); }
-        .form-field { margin-bottom: 12px; }
-        .form-field label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px; color: #4b5563; }
+        .form-card h4 { font-size: 15px; font-weight: 800; margin-bottom: 14px; color: var(--accent-gold); }
+        .form-field { margin-bottom: 14px; }
+        .form-field label { display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px; color: var(--text-light); }
         .form-input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d5db;
+            padding: 11px;
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 13.5px;
             outline: none;
-            background: #fbfbfb;
+            background: rgba(0,0,0,0.2);
+            color: var(--white);
         }
-        .form-input:focus { border-color: var(--kfc-red); background: var(--white); }
+        .form-input:focus { border-color: var(--accent-gold); background: rgba(0,0,0,0.3); }
         .form-flex { display: flex; gap: 10px; }
         .form-flex .form-field { flex: 1; }
 
         .submit-checkout-btn {
             width: 100%;
-            background: var(--kfc-red);
+            background: var(--brand-red);
             color: var(--white);
             border: none;
-            padding: 14px;
+            padding: 15px;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 900;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(228, 30, 38, 0.2);
+            box-shadow: 0 4px 15px rgba(228, 30, 38, 0.4);
         }
 
-        /* شريط التنقل السفلي */
+        /* شريط التنقل السفلي الثابت */
         .bottom-app-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 65px;
-            background: var(--white);
+            height: 68px;
+            background: var(--brand-green-card);
             display: flex;
-            box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
-            border-top: 1px solid #e5e7eb;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
+            border-top: 1px solid rgba(255,255,255,0.08);
             z-index: 999;
         }
         .nav-tab {
@@ -322,25 +327,25 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #9ca3af;
+            color: var(--text-muted);
             cursor: pointer;
             position: relative;
         }
-        .nav-tab.active { color: var(--kfc-red); }
-        .nav-tab-icon { font-size: 18px; margin-bottom: 2px; }
-        .nav-tab-label { font-size: 11px; font-weight: 700; }
+        .nav-tab.active { color: var(--accent-gold); }
+        .nav-tab-icon { font-size: 20px; margin-bottom: 2px; }
+        .nav-tab-label { font-size: 12px; font-weight: 700; }
         
         .cart-badge {
             position: absolute;
             top: 6px;
             right: 32%;
-            background: var(--kfc-red);
+            background: var(--brand-red);
             color: var(--white);
             font-size: 10px;
             font-weight: 900;
             padding: 1px 6px;
             border-radius: 10px;
-            min-width: 16px;
+            min-width: 17px;
             text-align: center;
         }
     </style>
@@ -349,14 +354,14 @@
 
     <div class="top-location-bar">
         <div class="location-info">
-            📍 <span>التوصيل إلى:</span> الخالدية، قطعة 2
+            📍 <span>التوصيل إلى:</span> الخالدية، جودة عالية
         </div>
         <button class="change-loc-btn">تغيير</button>
     </div>
 
     <div class="brand-header">
-        <h1>فتوش الخالدية</h1>
-        <p>طعم المشويات الأصيل على أصوله</p>
+        <h1>مشاويات فتوش الخالدية</h1>
+        <p>طعم المأكولات والمشاويات الفاخرة على أصولها</p>
         <div class="brand-phones">24841390 - 24820520</div>
     </div>
 
@@ -380,7 +385,7 @@
         <!-- صفحة الأقسام الرئيسية -->
         <div id="page-categories-list">
             <div class="section-header">
-                <span class="section-title">استكشف القائمة</span>
+                <span class="section-title">استكشف القائمة الكاملة</span>
             </div>
 
             <div class="categories-grid">
@@ -487,7 +492,7 @@
 
     </div>
 
-    <!-- شريط التنقل السفلي الثابت المحدث لـ iOS والـ Android -->
+    <!-- شريط التنقل السفلي الثابت -->
     <div class="bottom-app-nav">
         <div class="nav-tab active" id="btn-nav-menu" onclick="navigateToTab('menu')">
             <div class="nav-tab-icon">📋</div>
@@ -501,69 +506,85 @@
     </div>
 
     <script>
-        // قاعدة بيانات كاملة وخالية تماماً من الاختصارات أو الروابط المحلية المكسورة
+        // قاعدة البيانات الشاملة لجميع أصناف مشاويات فتوش الخالدية بدون أي نقص
         const database = [
             // ساندويتشات حارة وباردة
             { id: 1, name: 'ساندويتش شاورما لحم فاخر', price: 0.700, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=300&q=80' },
             { id: 2, name: 'ساندويتش شاورما دجاج مميز', price: 0.650, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1560614382-333489cf87b4?auto=format&fit=crop&w=300&q=80' },
-            { id: 3, name: 'ساندويتش كباب مشوي عالفحم', price: 0.650, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
+            { id: 3, name: 'ساندويتش كباب لحم مشوي', price: 0.650, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
             { id: 4, name: 'ساندويتش شيش طاووق لبناني', price: 0.600, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1532636875304-0c8fe119ff9e?auto=format&fit=crop&w=300&q=80' },
             { id: 5, name: 'ساندويتش فرانس دجاج بالجبن', price: 0.750, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1512152272829-e3139592d56f?auto=format&fit=crop&w=300&q=80' },
-            { id: 6, name: 'ساندويتش بطاطا بالثومية والكاتشب', price: 0.400, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=300&q=80' },
-            { id: 7, name: 'ساندويتش كبدة إسكندراني حارة', price: 0.650, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=300&q=80' },
-            { id: 8, name: 'ساندويتش فلافل سوبر محشي', price: 0.350, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?auto=format&fit=crop&w=300&q=80' },
+            { id: 6, name: 'ساندويتش كبدة إسكندراني حارة', price: 0.650, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=300&q=80' },
+            { id: 7, name: 'ساندويتش زنجر دجاج حار سبايسي', price: 0.800, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=300&q=80' },
+            { id: 8, name: 'ساندويتش مخلوط فتوش (لحم ودجاج)', price: 0.750, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=300&q=80' },
+            { id: 9, name: 'ساندويتش همبرغر لحم بالجبن والبطاط', price: 0.700, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80' },
+            { id: 10, name: 'ساندويتش بطاطا بالثومية والكاتشب', price: 0.400, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=300&q=80' },
+            { id: 11, name: 'ساندويتش فلافل سوبر محشي مشكل', price: 0.350, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?auto=format&fit=crop&w=300&q=80' },
             
             // ساندويتشات صاج
-            { id: 21, name: 'صاج شاورما لحم بالدبس', price: 0.900, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1626700051175-6518c4793f4f?auto=format&fit=crop&w=300&q=80' },
-            { id: 22, name: 'صاج شاورما دجاج ثوم بطاط', price: 0.850, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=300&q=80' },
-            { id: 23, name: 'صاج فلافل مقرمش بالراشي', price: 0.500, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?auto=format&fit=crop&w=300&q=80' },
-            { id: 24, name: 'صاج حلوم مشوي كامل الخضار', price: 0.750, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=300&q=80' },
-            { id: 25, name: 'صاج كباب دجاج بالخلطة', price: 0.800, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1594009487111-b4da12a83424?auto=format&fit=crop&w=300&q=80' },
+            { id: 21, name: 'صاج شاورما لحم بالدبس والراشي', price: 0.900, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1626700051175-6518c4793f4f?auto=format&fit=crop&w=300&q=80' },
+            { id: 22, name: 'صاج شاورما دجاج ثوم بطاط دبل', price: 0.850, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=300&q=80' },
+            { id: 23, name: 'صاج كباب لحم مشوي على الفحم', price: 0.850, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
+            { id: 24, name: 'صاج شيش طاووق بالخلطة اللبنانية', price: 0.800, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1532636875304-0c8fe119ff9e?auto=format&fit=crop&w=300&q=80' },
+            { id: 25, name: 'صاج حلوم مشوي كامل الخضار والنعناع', price: 0.750, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=300&q=80' },
+            { id: 26, name: 'صاج فلافل مقرمش مع بطاط وباذنجان', price: 0.500, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?auto=format&fit=crop&w=300&q=80' },
+            { id: 27, name: 'صاج مرتديلا بالجبن السائل والطماطم', price: 0.700, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=300&q=80' },
             
             // مشويات الخالدية
-            { id: 31, name: 'كيلو مشويات مشكلة فاخرة', price: 10.000, cat: 'grills', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=300&q=80' },
-            { id: 32, name: 'وجبة كباب لحم طازج (نفر)', price: 2.750, cat: 'grills', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
-            { id: 33, name: 'وجبة كباب دجاج شهي (نفر)', price: 2.250, cat: 'grills', img: 'https://images.unsplash.com/photo-1594009487111-b4da12a83424?auto=format&fit=crop&w=300&q=80' },
-            { id: 34, name: 'وجبة شيش طاووق مع البطاطا', price: 2.500, cat: 'grills', img: 'https://images.unsplash.com/photo-1532636875304-0c8fe119ff9e?auto=format&fit=crop&w=300&q=80' },
-            { id: 35, name: 'وجبة مشويات مشكلة فتوش', price: 3.000, cat: 'grills', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=300&q=80' },
-            { id: 36, name: 'ماعون عرايس لحم عالفحم', price: 1.750, cat: 'grills', img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=300&q=80' },
-            { id: 37, name: 'نصف دجاجة ماكينة على الفحم', price: 1.500, cat: 'grills', img: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=300&q=80' },
-            { id: 38, name: 'ريش غنم فاخرة (نفر)', price: 3.500, cat: 'grills', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
+            { id: 31, name: 'كيلو مشويات مشكلة فاخرة (مع مقبلات)', price: 10.000, cat: 'grills', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=300&q=80' },
+            { id: 32, name: 'نصف كيلو مشويات مشكلة فتوش', price: 5.500, cat: 'grills', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=300&q=80' },
+            { id: 33, name: 'وجبة كباب لحم طازج (نفر 4 سياخ)', price: 2.750, cat: 'grills', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
+            { id: 34, name: 'وجبة كباب دجاج شهي (نفر 4 سياخ)', price: 2.250, cat: 'grills', img: 'https://images.unsplash.com/photo-1594009487111-b4da12a83424?auto=format&fit=crop&w=300&q=80' },
+            { id: 35, name: 'وجبة كباب خشخاش بالصلصة الحارة', price: 3.000, cat: 'grills', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=300&q=80' },
+            { id: 36, name: 'وجبة شيش طاووق مع البطاطا والثوم', price: 2.500, cat: 'grills', img: 'https://images.unsplash.com/photo-1532636875304-0c8fe119ff9e?auto=format&fit=crop&w=300&q=80' },
+            { id: 37, name: 'وجبة تكة لحم غنم باللوكا والخلطة', price: 3.000, cat: 'grills', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
+            { id: 38, name: 'ريش غنم فاخرة ومحمرة (نفر)', price: 3.500, cat: 'grills', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
+            { id: 39, name: 'ماعون عرايس لحم عالفحم دبل', price: 1.750, cat: 'grills', img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=300&q=80' },
+            { id: 40, name: 'عرايس دجاج بالجبن كرسبي', price: 1.750, cat: 'grills', img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=300&q=80' },
+            { id: 41, name: 'دجاجة كاملة على الفحم مع السيرفيس', price: 2.800, cat: 'grills', img: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=300&q=80' },
+            { id: 42, name: 'نصف دجاجة ماكينة مع بطاط وثومية', price: 1.500, cat: 'grills', img: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=300&q=80' },
             
             // صواني مشويات
-            { id: 50, name: 'صينية مشويات ديوانية 3 أشخاص', price: 12.000, cat: 'trays', img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=300&q=80' },
-            { id: 51, name: 'صينية مشويات عائلية دبل', price: 16.000, cat: 'trays', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
-            { id: 52, name: 'صينية فتوش الملكية الكبرى', price: 22.000, cat: 'trays', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=300&q=80' },
-            { id: 53, name: 'صينية السعادة مشكل كباب وطاووق', price: 14.500, cat: 'trays', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=300&q=80' },
+            { id: 50, name: 'صينية مشويات ديوانية (3 أشخاص)', price: 12.000, cat: 'trays', img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=300&q=80' },
+            { id: 51, name: 'صينية مشويات عائلية دبل (5 أشخاص)', price: 16.000, cat: 'trays', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
+            { id: 52, name: 'صينية فتوش الملكية الكبرى (ديوانية كاملة)', price: 22.000, cat: 'trays', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=300&q=80' },
+            { id: 53, name: 'صينية السعادة (مشكل كباب وطاووق وعرايس)', price: 14.500, cat: 'trays', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=300&q=80' },
+            { id: 54, name: 'صينية التوفير المشكلة (كباب وتكة ودجاج فحم)', price: 9.500, cat: 'trays', img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=300&q=80' },
             
             // مواعين الخالدية
-            { id: 61, name: 'ماعون شاورما لحم صافي دبل', price: 3.250, cat: 'plates', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=300&q=80' },
-            { id: 62, name: 'ماعون شاورما دجاج صافي دبل', price: 3.000, cat: 'plates', img: 'https://images.unsplash.com/photo-1560614382-333489cf87b4?auto=format&fit=crop&w=300&q=80' },
-            { id: 63, name: 'ماعون مشكل شاورما فتوش', price: 3.500, cat: 'plates', img: 'https://images.unsplash.com/photo-1626700051175-6518c4793f4f?auto=format&fit=crop&w=300&q=80' },
-            { id: 64, name: 'ماعون كبسة لحم طازج اليوم', price: 3.750, cat: 'plates', img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=300&q=80' },
-            { id: 65, name: 'ماعون برياني دجاج على الأصول', price: 2.500, cat: 'plates', img: 'https://images.unsplash.com/photo-1594009487111-b4da12a83424?auto=format&fit=crop&w=300&q=80' },
+            { id: 61, name: 'ماعون شاورما لحم صافي دبل مع السيرفيس', price: 3.250, cat: 'plates', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=300&q=80' },
+            { id: 62, name: 'ماعون شاورما دجاج صافي دبل مع المخللات', price: 3.000, cat: 'plates', img: 'https://images.unsplash.com/photo-1560614382-333489cf87b4?auto=format&fit=crop&w=300&q=80' },
+            { id: 63, name: 'ماعون مشكل شاورما فتوش (ميكس عائلي)', price: 3.500, cat: 'plates', img: 'https://images.unsplash.com/photo-1626700051175-6518c4793f4f?auto=format&fit=crop&w=300&q=80' },
+            { id: 64, name: 'ماعون كبسة لحم طازج بالدقوس والأرز', price: 3.750, cat: 'plates', img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=300&q=80' },
+            { id: 65, name: 'ماعون برياني دجاج على الأصول الهندية', price: 2.500, cat: 'plates', img: 'https://images.unsplash.com/photo-1594009487111-b4da12a83424?auto=format&fit=crop&w=300&q=80' },
+            { id: 66, name: 'ماعون تكة لحم صافي بدون عظم ومقبلات', price: 3.250, cat: 'plates', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
+            { id: 67, name: 'ماعون ريش غنم ملكي مبخر', price: 3.800, cat: 'plates', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80' },
             
             // إفطار ومقبلات
-            { id: 71, name: 'ماعون حمص كريمي فاخر', price: 0.750, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1538220856186-0be0c085984d?auto=format&fit=crop&w=300&q=80' },
-            { id: 72, name: 'سلطة فتوش الخضراء طازجة', price: 1.000, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=300&q=80' },
-            { id: 73, name: 'سلطة تبولة لبنانية زيت زيتون', price: 1.000, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1623428187969-5da2dced5ebf?auto=format&fit=crop&w=300&q=80' },
-            { id: 74, name: 'صحن ورق عنب حامض حلو', price: 1.250, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=300&q=80' },
-            { id: 75, name: 'ماعون فلافل مشكل سوبر', price: 0.750, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?auto=format&fit=crop&w=300&q=80' },
-            { id: 76, name: 'ماعون متبل باذنجان بالرمان', price: 0.800, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=300&q=80' }
+            { id: 71, name: 'ماعون حمص كريمي فاخر بزيت الزيتون', price: 0.750, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1538220856186-0be0c085984d?auto=format&fit=crop&w=300&q=80' },
+            { id: 72, name: 'سلطة فتوش الخضراء الطازجة بالرمان', price: 1.000, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=300&q=80' },
+            { id: 73, name: 'سلطة تبولة لبنانية بالليمون وزيت الزيتون', price: 1.000, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1623428187969-5da2dced5ebf?auto=format&fit=crop&w=300&q=80' },
+            { id: 74, name: 'صحن ورق عنب حامض حلو بدبس الرمان', price: 1.250, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=300&q=80' },
+            { id: 75, name: 'ماعون متبل باذنجان مشوي بالراشي', price: 0.800, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=300&q=80' },
+            { id: 76, name: 'ماعون بابا غنوج الخضار الصحي', price: 0.800, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1538220856186-0be0c085984d?auto=format&fit=crop&w=300&q=80' },
+            { id: 77, name: 'ماعون فلافل مشكل سوبر حار وبارد', price: 0.750, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?auto=format&fit=crop&w=300&q=80' },
+            { id: 78, name: 'بوكس سمبوسة مشكلة (جبن، لحم، خضار)', price: 1.000, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?auto=format&fit=crop&w=300&q=80' },
+            { id: 79, name: 'كبة برغل شامية مقرمشة (حبة كبرى)', price: 0.250, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?auto=format&fit=crop&w=300&q=80' },
+            { id: 80, name: 'ماعون بطاطا حارة بالكزبرة والثوم', price: 0.850, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=300&q=80' }
         ];
 
         let currentCart = [];
         let currentMode = 'delivery';
         let currentDeliveryFee = 0.250;
-        const RestaurantWhatsApp = "96524841390"; // رقم المطعم المباشر
+        const RestaurantWhatsApp = "96524841390"; 
 
-        // دالة الأمان البديلة للصور: تولد فوراً صورة SVG مدمجة إذا تعثر الإنترنت
+        // دالة الأمان البديلة للصور لمنع التكرار اللانهائي وتأمين المتصفح
         function handleImgError(imageElement) {
-            imageElement.onerror = null; // يمنع الدخول في حلقة تكرارية نهائياً
-            imageElement.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'><rect width='100%' height='100%' fill='%23f3f4f6'/><text x='50%' y='50%' font-family='Cairo, sans-serif' font-weight='bold' font-size='15' fill='%23e41e26' text-anchor='middle' dominant-baseline='middle'>فتوش الخالدية 🍴</text></svg>";
+            imageElement.onerror = null; 
+            imageElement.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'><rect width='100%' height='100%' fill='%230d3421'/><text x='50%' y='50%' font-family='Cairo, sans-serif' font-weight='bold' font-size='16' fill='%23facc15' text-anchor='middle' dominant-baseline='middle'>فتوش الخالدية 🍴</text></svg>";
         }
 
-        // دالة التنقل السلس من شريط التنقل السفلي
+        // دالة التنقل السلس بين التبويبات السفليّة
         function navigateToTab(target) {
             const catListView = document.getElementById('page-categories-list');
             const innerProdView = document.getElementById('page-inner-products');
@@ -590,7 +611,7 @@
             }
         }
 
-        // دالة فتح الأقسام الفورية (معزولة بالكامل وآمنة)
+        // دالة فتح الأقسام السريعة والآمنة فورياً
         function openCategory(categoryKey, categoryTitle) {
             document.getElementById('page-categories-list').style.display = 'none';
             document.getElementById('page-cart-view').style.display = 'none';
@@ -619,13 +640,13 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // العودة إلى قائمة الأقسام الرئيسية
+        // العودة للقائمة الرئيسية للأقسام
         function closeCategory() {
             document.getElementById('page-inner-products').style.display = 'none';
             document.getElementById('page-categories-list').style.display = 'block';
         }
 
-        // تبديل أسلوب الاستلام والتوصيل العلوية
+        // تبديل نوع استلام الطلبات علوياً
         function switchOrderMode(mode) {
             currentMode = mode;
             document.getElementById('mode-del').classList.toggle('active', mode === 'delivery');
@@ -645,7 +666,7 @@
             recalcDeliveryPrice();
         }
 
-        // حساب أسعار توصيل المندوب ديناميكياً
+        // احتساب قيمة التوصيل بناء على المنطقة المدخلة تلقائياً
         function recalcDeliveryPrice() {
             if (currentMode !== 'delivery') {
                 currentDeliveryFee = 0.000;
@@ -661,7 +682,7 @@
             recalcTotals();
         }
 
-        // إضافة وجبة للسلة
+        // إضافة صنف إلى السلة الإلكترونية
         function pushToBasket(id) {
             const productObj = database.find(p => p.id === id);
             currentCart.push(productObj);
@@ -672,18 +693,18 @@
             setTimeout(() => badge.style.transform = 'scale(1)', 150);
         }
 
-        // إزالة وجبة من السلة
+        // إزالة عنصر من السلة
         function popFromBasket(index) {
             currentCart.splice(index, 1);
             document.getElementById('badge-count').textContent = currentCart.length;
             renderCartList();
         }
 
-        // بناء عناصر السلة داخل الصفحة
+        // رندرة وبناء عناصر وعشاء السلة
         function renderCartList() {
             const wrapper = document.getElementById('cart-items-wrapper');
             if (currentCart.length === 0) {
-                wrapper.innerHTML = `<p style="text-align:center; padding:30px; font-size:13px; color:var(--text-gray);">السلة فارغة حالياً، اختر وجباتك الشهية من القائمة.</p>`;
+                wrapper.innerHTML = `<p style="text-align:center; padding:30px; font-size:13px; color:var(--text-muted);">السلة فارغة حالياً، أضف وجباتك اللذيذة من القائمة.</p>`;
                 recalcTotals();
                 return;
             }
@@ -703,7 +724,7 @@
             recalcTotals();
         }
 
-        // حساب مجاميع الحسابات النهائية
+        // تجميع واحتساب الحساب النهائي الفوري
         function recalcTotals() {
             let foodSum = 0;
             currentCart.forEach(i => foodSum += i.price);
@@ -713,23 +734,23 @@
             document.getElementById('txt-total').textContent = grandTotal.toFixed(3);
         }
 
-        // بناء الرسالة وإرسالها الفوري إلى واتساب المطعم
+        // بناء الطلب بالكامل وتوجيهه الفوري إلى الواتساب
         function fireFinalOrder() {
             const name = document.getElementById('form-name').value.trim();
             const phone = document.getElementById('form-phone').value.trim();
 
             if (!name || !phone) {
-                alert('فضلاً، اكتب الاسم ورقم الموبايل لإرسال طلبك.');
+                alert('فضلاً، يرجى ملء الاسم ورقم الهاتف لمتابعة طلبك.');
                 return;
             }
             if (currentCart.length === 0) {
-                alert('سلتك فارغة! يرجى إضافة أصناف من القائمة أولاً.');
+                alert('السلة فارغة! اختر بعض الأصناف أولاً.');
                 return;
             }
 
-            let textSummary = `*✨ طلب جديد - فتوش الخالدية ✨*\n\n`;
+            let textSummary = `*✨ طلب جديد - مشاويات فتوش الخالدية ✨*\n\n`;
             textSummary += `👤 *العميل:* ${name}\n`;
-            textSummary += `📞 *هاتف:* ${phone}\n`;
+            textSummary += `📞 *رقم الهاتف:* ${phone}\n`;
             
             if (currentMode === 'delivery') {
                 const reg = document.getElementById('form-region').value.trim();
@@ -737,19 +758,19 @@
                 const str = document.getElementById('form-street').value.trim();
                 const hse = document.getElementById('form-house').value.trim();
                 if(!reg || !blk || !str || !hse) {
-                    alert('يرجى إدخال بيانات العنوان كاملة للتوصيل.');
+                    alert('يرجى إدخال عنوان التوصيل كاملاً من فضلك.');
                     return;
                 }
-                textSummary += `🛵 *نوع الطلب:* توصيل للمنزل\n📍 *العنوان:* ${reg}، ق ${blk}، ش ${str}، م ${hse}\n`;
+                textSummary += `🛵 *نوع الطلب:* توصيل للمنزل\n📍 *العنوان:* منطقة ${reg}، ق ${blk}، شارع ${str}، منزل ${hse}\n`;
             } else if(currentMode === 'pickup') {
-                textSummary += `🛍️ *نوع الطلب:* استلام من فرع الجمعية\n`;
+                textSummary += `🛍️ *نوع الطلب:* استلام شخصي من فرع الجمعية\n`;
             } else {
-                textSummary += `🚗 *نوع الطلب:* استلام مباشر من السيارة\n`;
+                textSummary += `🚗 *نوع الطلب:* استلام مباشر بالسيارة\n`;
             }
 
             textSummary += `\n📦 *الأصناف المطلوبة:*\n`;
             
-            // حساب تكرار العناصر المتشابهة
+            // حساب العناصر المتكررة بدقة وثبات
             const itemCounts = {};
             currentCart.forEach(item => {
                 itemCounts[item.name] = (itemCounts[item.name] || 0) + 1;
@@ -760,11 +781,11 @@
                 textSummary += `- ${itemName} (${count} حبة) : ${(singleItem.price * count).toFixed(3)} د.ك\n`;
             }
 
-            textSummary += `\n💵 *مجموع الطعام:* ${document.getElementById('txt-subtotal').textContent} د.ك\n`;
+            textSummary += `\n💵 *صافي قيمة الطعام:* ${document.getElementById('txt-subtotal').textContent} د.ك\n`;
             if (currentMode === 'delivery') {
                 textSummary += `🛵 *أجور التوصيل:* ${currentDeliveryFee.toFixed(3)} د.ك\n`;
             }
-            textSummary += `💰 *الحساب الإجمالي النهائي:* ${document.getElementById('txt-total').textContent} د.ك\n`;
+            textSummary += `💰 *الحساب الإجمالي الإجمالي:* ${document.getElementById('txt-total').textContent} د.ك\n`;
 
             const whatsappUrl = `https://wa.me/${RestaurantWhatsApp}?text=${encodeURIComponent(textSummary)}`;
             window.open(whatsappUrl, '_blank');
