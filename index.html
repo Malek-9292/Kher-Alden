@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>منيو فتوش الخالدية</title>
+    <title>فتوش الخالدية</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --kfc-red: #e41e26;
             --kfc-dark: #111111;
-            --bg-gray: #f3f4f6;
+            --bg-gray: #f4f5f7;
             --white: #ffffff;
-            --border-color: #e5e7eb;
+            --text-gray: #6b7280;
         }
 
         * {
@@ -28,250 +28,305 @@
         body {
             background-color: var(--bg-gray);
             color: var(--kfc-dark);
-            padding-bottom: 80px; /* مساحة ثابتة للشريط السفلي */
+            padding-bottom: 90px;
         }
 
-        /* شريط التوصيل العلوي - ستايل تطبيقات */
-        .top-delivery-status {
+        /* شريط الموقع العلوي */
+        .top-location-bar {
             background: var(--white);
             padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 13px;
-            font-weight: 800;
+            border-bottom: 1px solid #e5e7eb;
         }
-        .top-delivery-status span { color: #6b7280; font-weight: 600; }
-
-        /* الهيدر المبسط للمطعم */
-        .app-header {
-            background: var(--white);
-            text-align: center;
-            padding: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .app-header h1 { font-size: 20px; font-weight: 900; color: var(--kfc-dark); }
-        .app-header p { font-size: 12px; color: #6b7280; }
-
-        /* كبسولات تبديل طريقة الطلب */
-        .order-switcher {
+        .location-info {
             display: flex;
-            background: #e5e7eb;
-            margin: 12px 16px;
-            padding: 4px;
-            border-radius: 30px;
-            gap: 4px;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 700;
         }
-        .switch-btn {
-            flex: 1;
+        .location-info span { color: var(--text-gray); font-weight: 500; }
+        
+        .change-loc-btn {
+            background: #eef2f6;
+            color: #007aff;
             border: none;
-            padding: 8px;
-            border-radius: 25px;
+            padding: 4px 12px;
+            border-radius: 12px;
             font-size: 12px;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
-            background: transparent;
-            color: #4b5563;
-            transition: all 0.2s ease;
         }
-        .switch-btn.active {
+
+        /* هيدر المطعم */
+        .brand-header {
+            text-align: center;
+            padding: 15px 15px 5px 15px;
+            background: var(--white);
+        }
+        .brand-header h1 { font-size: 20px; font-weight: 900; color: var(--kfc-dark); }
+        .brand-header p { font-size: 12px; color: var(--text-gray); margin-bottom: 6px; }
+        .brand-phones {
             background: var(--kfc-red);
             color: var(--white);
-            box-shadow: 0 2px 6px rgba(228, 30, 38, 0.3);
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            direction: ltr;
+        }
+
+        /* خيارات استلام الطلب الدائرية - ستايل كنتاكي */
+        .order-modes-scroller {
+            display: flex;
+            gap: 16px;
+            padding: 12px 16px;
+            justify-content: center;
+            background: var(--white);
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .mode-pill {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .mode-icon-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .mode-pill.active .mode-icon-circle {
+            border-color: var(--kfc-red);
+            background: #fff5f5;
+            box-shadow: 0 4px 10px rgba(228, 30, 38, 0.15);
+        }
+        .mode-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-gray);
+        }
+        .mode-pill.active .mode-title {
+            color: var(--kfc-red);
+            font-weight: 900;
         }
 
         .container { padding: 0 16px; max-width: 600px; margin: 0 auto; }
 
-        /* بنر العروض الترويجي */
-        .promo-card {
-            background: linear-gradient(135deg, #e41e26 0%, #b31217 100%);
-            border-radius: 16px;
-            padding: 16px;
-            color: var(--white);
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(228, 30, 38, 0.2);
+        /* عنوان استكشف القائمة */
+        .section-header {
+            margin: 20px 0 12px 0;
         }
-        .promo-card h3 { font-size: 16px; font-weight: 900; }
-        .promo-card p { font-size: 11px; opacity: 0.9; }
-
         .section-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 900;
-            margin: 15px 0 10px 0;
-            color: var(--kfc-dark);
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 30px;
+            height: 3px;
+            background: var(--kfc-red);
+            border-radius: 2px;
         }
 
-        /* 📱 شبكة الأقسام المتطابقة تماماً مع كنتاكي (3 أعمدة ونفس الحجم والزوايا) */
-        .grid-3-columns {
+        /* شبكة الأقسام المتطابقة تماماً (3 أعمدة وحجم مربع متناسق) */
+        .categories-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
         }
-        .kfc-card {
+        .kfc-category-card {
             background: var(--white);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
-            aspect-ratio: 1 / 1.1;
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.04);
             cursor: pointer;
         }
-        .kfc-card img {
+        
+        .kfc-category-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
-        /* التدرج الأسود المدمج أسفل الكارت لرؤية النص بوضوح وثبات */
-        .kfc-card::after {
+        /* غطاء شفاف متدرج لضمان وضوح الكلمات بالأسفل */
+        .kfc-category-card::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 55%;
+            height: 65%;
             background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
         }
-        .kfc-card-text {
+        .kfc-category-title {
             position: absolute;
             bottom: 8px;
-            left: 4px;
             right: 4px;
+            left: 4px;
             color: var(--white);
             font-size: 11px;
-            font-weight: 800;
+            font-weight: 700;
             text-align: center;
             z-index: 2;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+            line-height: 1.3;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
         }
 
-        /* شاشات التطبيق المستقلة تماماً (تمنع التعليق) */
-        .app-page { display: none; }
-        .app-page.active-page { display: block; }
-
-        /* شاشة عرض المنتجات الداخلية */
-        .back-bar {
+        /* صفحة عرض المنتجات المنفصلة بالكامل */
+        .page-header-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             margin: 15px 0;
         }
-        .back-arrow {
-            width: 32px;
-            height: 32px;
-            background: var(--white);
-            border: 1px solid var(--border-color);
+        .back-circle-btn {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            background: var(--white);
+            border: 1px solid #e5e7eb;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             font-weight: bold;
+            font-size: 16px;
         }
-        .grid-2-columns {
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
-        .product-item-card {
+        .product-card {
             background: var(--white);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 10px;
-            border: 1px solid #eaeaea;
+            border: 1px solid #f0f0f0;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
-        .product-item-card img {
+        .prod-img-box {
             width: 100%;
-            height: 95px;
-            object-fit: cover;
-            border-radius: 8px;
+            height: 100px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f9fafb;
             margin-bottom: 6px;
         }
-        .p-name { font-size: 12px; font-weight: 800; min-height: 34px; line-height: 1.4; }
-        .p-price { color: var(--kfc-red); font-weight: 900; font-size: 13px; margin: 4px 0; }
-        .add-item-btn {
+        .prod-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .prod-title { font-size: 13px; font-weight: 700; min-height: 38px; line-height: 1.4; }
+        .prod-price { color: var(--kfc-red); font-weight: 900; font-size: 14px; margin: 4px 0; }
+        
+        .add-to-cart-btn {
             background: #fff1f2;
             color: var(--kfc-red);
             border: 1px solid #fecdd3;
-            padding: 5px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 800;
+            padding: 6px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
         }
+        .add-to-cart-btn:hover { background: var(--kfc-red); color: white; }
 
-        /* شاشة المشتريات والدفع */
-        .row-item {
+        /* صفحة السلة والدفع المستقلة */
+        .cart-title-main { font-size: 16px; font-weight: 900; margin: 15px 0; }
+        .cart-item-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: var(--white);
             padding: 12px;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 8px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #eaeaea;
         }
-        .row-item-text h4 { font-size: 13px; font-weight: 800; }
-        .row-item-text span { color: var(--kfc-red); font-weight: 900; font-size: 12px; }
-        .del-btn { color: #ef4444; font-weight: 900; cursor: pointer; }
-
-        .bill-card {
+        .cart-item-info h4 { font-size: 13px; font-weight: 700; }
+        .cart-item-info span { color: var(--kfc-red); font-weight: 800; font-size: 13px; }
+        .remove-btn { color: #ef4444; font-weight: 800; cursor: pointer; font-size: 14px; }
+        
+        .summary-card {
             background: var(--white);
-            border-radius: 12px;
-            padding: 14px;
+            border-radius: 16px;
+            padding: 16px;
             margin: 15px 0;
-            border: 1px solid var(--border-color);
+            border: 1px solid #e5e7eb;
         }
-        .bill-line { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; color: #4b5563; }
-        .bill-total { display: flex; justify-content: space-between; font-size: 15px; font-weight: 900; color: var(--kfc-red); padding-top: 8px; border-top: 1px dashed var(--border-color); }
+        .summary-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; color: #4b5563; }
+        .summary-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 900; color: var(--kfc-red); padding-top: 8px; border-top: 1px dashed #e5e7eb; }
 
-        .input-box {
+        .form-card {
             background: var(--white);
-            border-radius: 12px;
-            padding: 14px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 15px;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 20px;
         }
-        .input-box h4 { font-size: 13px; font-weight: 900; margin-bottom: 10px; }
-        .field { margin-bottom: 10px; }
-        .field label { display: block; font-size: 11px; font-weight: 800; margin-bottom: 3px; color: #4b5563; }
-        .control { width: 100%; padding: 9px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 12px; outline: none; background: #fafafa; }
-        .control:focus { border-color: var(--kfc-red); background: var(--white); }
-        .field-flex { display: flex; gap: 8px; }
-        .field-flex .field { flex: 1; }
+        .form-card h4 { font-size: 14px; font-weight: 800; margin-bottom: 12px; color: var(--kfc-dark); }
+        .form-field { margin-bottom: 12px; }
+        .form-field label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px; color: #4b5563; }
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            background: #fbfbfb;
+        }
+        .form-input:focus { border-color: var(--kfc-red); background: var(--white); }
+        .form-flex { display: flex; gap: 10px; }
+        .form-flex .form-field { flex: 1; }
 
-        .btn-order-execute {
+        .submit-checkout-btn {
             width: 100%;
             background: var(--kfc-red);
             color: var(--white);
             border: none;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
             font-weight: 900;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(228, 30, 38, 0.2);
+            box-shadow: 0 4px 12px rgba(228, 30, 38, 0.2);
         }
 
-        /* 📱 شريط التنقل السفلي الثابت الأصلي الفخم */
-        .bottom-nav-bar {
+        /* شريط التنقل السفلي الاحترافي الثابت */
+        .bottom-app-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 60px;
+            height: 65px;
             background: var(--white);
             display: flex;
-            box-shadow: 0 -3px 10px rgba(0,0,0,0.05);
-            border-top: 1px solid var(--border-color);
-            z-index: 9999;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+            border-top: 1px solid #e5e7eb;
+            z-index: 999;
         }
-        .tab-item {
+        .nav-tab {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -281,175 +336,382 @@
             cursor: pointer;
             position: relative;
         }
-        .tab-item.active-tab { color: var(--kfc-red); }
-        .tab-icon { font-size: 18px; }
-        .tab-label { font-size: 10px; font-weight: 800; }
+        .nav-tab.active { color: var(--kfc-red); }
+        .nav-tab-icon { font-size: 18px; margin-bottom: 2px; }
+        .nav-tab-label { font-size: 11px; font-weight: 700; }
         
-        .counter-badge {
+        .cart-badge {
             position: absolute;
-            top: 4px;
-            right: 34%;
+            top: 6px;
+            right: 32%;
             background: var(--kfc-red);
             color: var(--white);
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 900;
-            padding: 1px 5px;
+            padding: 1px 6px;
             border-radius: 10px;
+            min-width: 16px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-delivery-status">
-        <div>📍 فرع الجمعية الرئيسي</div>
-        <div style="color: var(--kfc-red);">مفتوح للطلب الآن 🟢</div>
+    <div class="top-location-bar">
+        <div class="location-info">
+            📍 <span>التوصيل إلى:</span> الخالدية، قطعة 2
+        </div>
+        <button class="change-loc-btn">تغيير</button>
     </div>
 
-    <div class="app-header">
-        <h1>مشويات فتوش الخالدية</h1>
-        <p>طعم المأكولات والمشويات الكويتية على أصولها</p>
+    <div class="brand-header">
+        <h1>فتوش الخالدية</h1>
+        <p>طعم المشويات الأصيل على أصوله</p>
+        <div class="brand-phones">24841390 - 24820520</div>
     </div>
 
-    <div class="order-switcher">
-        <button class="switch-btn active" id="sw-delivery" onclick="changeOrderMethod('delivery')">🛵 توصيل للمنزل</button>
-        <button class="switch-btn" id="sw-pickup" onclick="changeOrderMethod('pickup')">🛍️ استلام من الفرع</button>
+    <div class="order-modes-scroller">
+        <div class="mode-pill active" id="mode-del" onclick="switchOrderMode('delivery')">
+            <div class="mode-icon-circle">🛵</div>
+            <div class="mode-title">التوصيل</div>
+        </div>
+        <div class="mode-pill" id="mode-pick" onclick="switchOrderMode('pickup')">
+            <div class="mode-icon-circle">🛍️</div>
+            <div class="mode-title">الاستلام</div>
+        </div>
+        <div class="mode-pill" id="mode-car" onclick="switchOrderMode('car')">
+            <div class="mode-icon-circle">🚗</div>
+            <div class="mode-title">للسيارة</div>
+        </div>
     </div>
 
     <div class="container">
         
-        <div id="view-home" class="app-page active-page">
-            <div class="promo-card">
-                <h3>🔥 عروض الجمعات والديوانية</h3>
-                <p>استمتع بخصم خاص عند طلب صواني المشويات العائلية اليوم كاش</p>
+        <div id="page-categories-list">
+            <div class="section-header">
+                <span class="section-title">استكشف القائمة</span>
             </div>
 
-            <div class="section-title">استكشف القائمة الملونة</div>
-            
-            <div class="grid-3-columns">
+            <div class="categories-grid">
                 
-                <div class="kfc-card" onclick="loadCategoryData('sandwiches', 'ساندويتشات حارة وباردة')">
-                    <img src="img/cat_sandwiches.jpg" onerror="this.src='https://images.unsplash.com/photo-1509722747041-616f39b57569?w=150'">
-                    <div class="kfc-card-text">ساندويتشات حارة وباردة</div>
+                <div class="kfc-category-card" onclick="openCategory('hot_cold_sandwiches', 'ساندويتشات حارة وباردة')">
+                    <img src="img/cat_sandwiches.jpg" class="kfc-category-img" onerror="this.src='https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=200&q=80'">
+                    <div class="kfc-category-title">ساندويتشات حارة وباردة</div>
                 </div>
 
-                <div class="kfc-card" onclick="loadCategoryData('saj', 'ساندويتشات صاج')">
-                    <img src="img/cat_saj.jpg" onerror="this.src='https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=150'">
-                    <div class="kfc-card-text">ساندويتشات صاج</div>
+                <div class="kfc-category-card" onclick="openCategory('saj_sandwiches', 'ساندويتشات صاج')">
+                    <img src="img/cat_saj.jpg" class="kfc-category-img" onerror="this.src='https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=200&q=80'">
+                    <div class="kfc-category-title">ساندويتشات صاج</div>
                 </div>
 
-                <div class="kfc-card" onclick="loadCategoryData('grills', 'مشويات الخالدية')">
-                    <img src="img/cat_grills.jpg" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=150'">
-                    <div class="kfc-card-text">مشويات الخالدية</div>
+                <div class="kfc-category-card" onclick="openCategory('grills', 'مشويات الخالدية')">
+                    <img src="img/cat_grills.jpg" class="kfc-category-img" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=200&q=80'">
+                    <div class="kfc-category-title">مشويات الخالدية</div>
                 </div>
 
-                <div class="kfc-card" onclick="loadCategoryData('trays', 'صواني مشويات')">
-                    <img src="img/cat_trays.jpg" onerror="this.src='https://images.unsplash.com/photo-1541832676-9b763b0239ab?w=150'">
-                    <div class="kfc-card-text">صواني مشويات</div>
+                <div class="kfc-category-card" onclick="openCategory('trays', 'صواني مشويات')">
+                    <img src="img/cat_trays.jpg" class="kfc-category-img" onerror="this.src='https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=200&q=80'">
+                    <div class="kfc-category-title">صواني مشويات</div>
                 </div>
 
-                <div class="kfc-card" onclick="loadCategoryData('plates', 'مواعين الخالدية')">
-                    <img src="img/cat_plates.jpg" onerror="this.src='https://images.unsplash.com/photo-1544025162-d76694265947?w=150'">
-                    <div class="kfc-card-text">مواعين الخالدية</div>
+                <div class="kfc-category-card" onclick="openCategory('plates', 'مواعين الخالدية')">
+                    <img src="img/cat_plates.jpg" class="kfc-category-img" onerror="this.src='https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80'">
+                    <div class="kfc-category-title">مواعين الخالدية</div>
                 </div>
 
-                <div class="kfc-card" onclick="loadCategoryData('breakfast', 'إفطار ومقبلات')">
-                    <img src="img/cat_breakfast.jpg" onerror="this.src='https://images.unsplash.com/photo-1538220856186-0be0c085984d?w=150'">
-                    <div class="kfc-card-text">إفطار ومقبلات</div>
+                <div class="kfc-category-card" onclick="openCategory('breakfast', 'إفطار ومقبلات')">
+                    <img src="img/cat_breakfast.jpg" class="kfc-category-img" onerror="this.src='https://images.unsplash.com/photo-1538220856186-0be0c085984d?auto=format&fit=crop&w=200&q=80'">
+                    <div class="kfc-category-title">إفطار ومقبلات</div>
                 </div>
 
             </div>
         </div>
 
-        <div id="view-products" class="app-page">
-            <div class="back-bar">
-                <div class="back-arrow" onclick="switchMainTab('home')">➔</div>
-                <h3 id="target-cat-title" style="font-size: 15px; font-weight: 900;">الأصناف</h3>
+        <div id="page-inner-products" style="display: none;">
+            <div class="page-header-container">
+                <div class="back-circle-btn" onclick="closeCategory()">➔</div>
+                <h3 id="current-category-name">اسم القسم</h3>
             </div>
-            <div class="grid-2-columns" id="products-area"></div>
+            <div class="products-grid" id="products-render-target"></div>
         </div>
 
-        <div id="view-cart" class="app-page">
-            <div class="section-title">🛒 السلة الحالية للأصناف</div>
-            <div id="basket-list-view"></div>
+        <div id="page-cart-view" style="display: none;">
+            <h3 class="cart-title-main">🛒 الأصناف المطلوبة بالطلب</h3>
+            <div id="cart-items-wrapper"></div>
 
-            <div class="bill-card">
-                <div class="bill-line">
-                    <span>مجموع مبيعات الوجبات:</span>
-                    <span><span id="bill-subtotal">0.000</span> د.ك</span>
+            <div class="summary-card">
+                <div class="summary-row">
+                    <span>مجموع المأكولات:</span>
+                    <span><span id="txt-subtotal">0.000</span> د.ك</span>
                 </div>
-                <div class="bill-line" id="bill-delivery-row">
-                    <span>أجور توصيل المندوب الفورية:</span>
-                    <span><span id="bill-delivery-fee">0.250</span> د.ك</span>
+                <div class="summary-row" id="row-delivery-fee">
+                    <span>أجور توصيل المندوب:</span>
+                    <span><span id="txt-delivery">0.250</span> د.ك</span>
                 </div>
-                <div class="bill-total">
-                    <span>الحساب الصافي الإجمالي:</span>
-                    <span><span id="bill-total-amount">0.000</span> د.ك</span>
+                <div class="summary-total">
+                    <span>الحساب الإجمالي النهائي:</span>
+                    <span><span id="txt-total">0.000</span> د.ك</span>
                 </div>
             </div>
 
-            <div class="input-box">
-                <h4>📋 استمارة تأكيد العميل كاش</h4>
-                <div class="field">
+            <div class="form-card">
+                <h4>📋 بيانات استلام العميل</h4>
+                <div class="form-field">
                     <label>الاسم بالكامل</label>
-                    <input type="text" id="inp-name" class="control" placeholder="اسم المستلم">
+                    <input type="text" id="form-name" class="form-input" placeholder="اكتب اسمك">
                 </div>
-                <div class="field">
-                    <label>رقم هاتف الاتصال المباشر</label>
-                    <input type="tel" id="inp-phone" class="control" placeholder="رقم الموبايل">
+                <div class="form-field">
+                    <label>رقم الهاتف المباشر</label>
+                    <input type="tel" id="form-phone" class="form-input" placeholder="رقم الموبايل">
                 </div>
                 
-                <div id="address-fields">
-                    <div class="field-flex">
-                        <div class="field">
+                <div id="address-block-form">
+                    <div class="form-flex">
+                        <div class="form-field">
                             <label>المنطقة</label>
-                            <input type="text" id="inp-region" class="control" value="الخالدية" oninput="calculateDeliveryCost()">
+                            <input type="text" id="form-region" class="form-input" value="الخالدية" oninput="recalcDeliveryPrice()">
                         </div>
-                        <div class="field">
+                        <div class="form-field">
                             <label>القطعة</label>
-                            <input type="text" id="inp-block" class="control" placeholder="قطعة">
+                            <input type="text" id="form-block" class="form-input" placeholder="قطعة">
                         </div>
                     </div>
-                    <div class="field-flex">
-                        <div class="field">
+                    <div class="form-flex">
+                        <div class="form-field">
                             <label>الشارع</label>
-                            <input type="text" id="inp-street" class="control" placeholder="شارع">
+                            <input type="text" id="form-street" class="form-input" placeholder="شارع">
                         </div>
-                        <div class="field">
-                            <label>المنزل</label>
-                            <input type="text" id="inp-house" class="control" placeholder="منزل">
+                        <div class="form-field">
+                            <label>المنزل / الشقة</label>
+                            <input type="text" id="form-house" class="form-input" placeholder="منزل">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button class="btn-order-execute" onclick="executeCashOrder()">🚀 تأكيد وإرسال طلب الكاش</button>
+            <button class="submit-checkout-btn" onclick="fireFinalOrder()">🚀 إرسال وتأكيد الطلب الفوري</button>
         </div>
 
     </div>
 
-    <div class="bottom-nav-bar">
-        <div class="tab-item active-tab" id="tab-home-btn" onclick="switchMainTab('home')">
-            <div class="tab-icon">📋</div>
-            <div class="tab-label">القائمة</div>
+    <div class="bottom-app-nav">
+        <div class="nav-tab active" id="btn-nav-menu" onclick="navigateToTab('menu')">
+            <div class="nav-tab-icon">📋</div>
+            <div class="nav-tab-label">القائمة</div>
         </div>
-        <div class="tab-item" id="tab-cart-btn" onclick="switchMainTab('cart')">
-            <div class="tab-icon">🛒</div>
-            <div class="tab-label">السلة</div>
-            <div class="counter-badge" id="cart-badge-num">0</div>
+        <div class="nav-tab" id="btn-nav-cart" onclick="navigateToTab('cart')">
+            <div class="nav-tab-icon">🛒</div>
+            <div class="nav-tab-label">السلة</div>
+            <div class="cart-badge" id="badge-count">0</div>
         </div>
     </div>
 
     <script>
-        // داتا المنتجات الشاملة والمنظمة لجميع الأقسام
-        const itemsMenu = [
-            { id: 1, name: 'ساندويش شاورما لحم فاخر', price: 0.650, category: 'sandwiches', fallbackImg: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=200' },
-            { id: 2, name: 'ساندويش شاورما دجاج مميز', price: 0.650, category: 'sandwiches', fallbackImg: 'https://images.unsplash.com/photo-1560614382-333489cf87b4?w=200' },
-            { id: 3, name: 'ساندويش كباب مشوي عالفحم', price: 0.600, category: 'sandwiches', fallbackImg: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=200' },
-            { id: 4, name: 'ساندويش شيش طاووق لبناني', price: 0.600, category: 'sandwiches', fallbackImg: 'https://images.unsplash.com/photo-1532636875304-0c8fe119ff9e?w=200' },
+        // قاعدة بيانات المنيو المنظمة
+        const database = [
+            { id: 1, name: 'ساندويش شاورما لحم فاخر', price: 0.650, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=200&q=80' },
+            { id: 2, name: 'ساندويش شاورما دجاج مميز', price: 0.650, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1560614382-333489cf87b4?auto=format&fit=crop&w=200&q=80' },
+            { id: 3, name: 'ساندويش كباب مشوي عالفحم', price: 0.600, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80' },
+            { id: 4, name: 'ساندويش شيش طاووق لبناني', price: 0.600, cat: 'hot_cold_sandwiches', img: 'https://images.unsplash.com/photo-1532636875304-0c8fe119ff9e?auto=format&fit=crop&w=200&q=80' },
             
-            { id: 22, name: 'صاج فلافل مقرمش بالراشي', price: 0.400, category: 'saj', fallbackImg: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?w=200' },
-            { id: 24, name: 'صاج شاورما دجاج عربي', price: 0.650, category: 'saj', fallbackImg: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=200' },
+            { id: 22, name: 'صاج فلافل مقرمش بالراشي', price: 0.400, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1547058881-aa0edd92aab3?auto=format&fit=crop&w=200&q=80' },
+            { id: 24, name: 'صاج شاورما دجاج عربي', price: 0.650, cat: 'saj_sandwiches', img: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=200&q=80' },
             
-            { id: 33, name: 'وجبة كباب لحم طازج (نفر)', price: 2.750, category: 'grills', fallbackImg: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=200' },
-            { id: 34, name: 'وجبة كباب دجاج شهي (نفر)', price: 2.250, category: 'grills', fallbackImg: 'https://images.unsplash.com/photo-1594009487111-b4da12a83424?w=200' },
-            { id: 36, name: 'وجبة مشويات مشكلة فتوش', price: 3.000, category: 'grills', fallbackImg: '
+            { id: 33, name: 'وجبة كباب لحم طازج (نفر)', price: 2.750, cat: 'grills', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=200&q=80' },
+            { id: 34, name: 'وجبة كباب دجاج شهي (نفر)', price: 2.250, cat: 'grills', img: 'https://images.unsplash.com/photo-1594009487111-b4da12a83424?auto=format&fit=crop&w=200&q=80' },
+            { id: 36, name: 'وجبة مشويات مشكلة فتوش', price: 3.000, cat: 'grills', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=200&q=80' },
+            
+            { id: 50, name: 'صينية مشويات ديوانية 3 أشخاص', price: 12.000, cat: 'trays', img: 'https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=200&q=80' },
+            { id: 51, name: 'صينية مشويات عائلية دبل', price: 14.000, cat: 'trays', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80' },
+            
+            { id: 62, name: 'ماعون شاورما لحم صافي', price: 3.000, cat: 'plates', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=200&q=80' },
+            
+            { id: 74, name: 'ماعون حمص كريمي فاخر', price: 0.750, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1538220856186-0be0c085984d?auto=format&fit=crop&w=200&q=80' },
+            { id: 82, name: 'سلطة فتوش الخضراء طازجة', price: 1.000, cat: 'breakfast', img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=200&q=80' }
+        ];
+
+        let currentCart = [];
+        let currentMode = 'delivery';
+        let currentDeliveryFee = 0.250;
+
+        // دالة التنقل بين القائمة والسلة من الشريط السفلي (فصل كامل)
+        function navigateToTab(target) {
+            const catListView = document.getElementById('page-categories-list');
+            const innerProdView = document.getElementById('page-inner-products');
+            const cartView = document.getElementById('page-cart-view');
+            
+            const btnMenu = document.getElementById('btn-nav-menu');
+            const btnCart = document.getElementById('btn-nav-cart');
+
+            if (target === 'menu') {
+                catListView.style.display = 'block';
+                innerProdView.style.display = 'none'; // تأكيد غلق أي صنف مفتوح
+                cartView.style.display = 'none';
+                
+                btnMenu.classList.add('active');
+                btnCart.classList.remove('active');
+            } else {
+                catListView.style.display = 'none';
+                innerProdView.style.display = 'none';
+                cartView.style.display = 'block';
+                
+                btnMenu.classList.remove('active');
+                btnCart.classList.add('active');
+                renderCartList();
+            }
+        }
+
+        // دالة فتح القسم الفورية (تخفي قائمة الأقسام وتظهر المنتجات فوراً وبشكل معزول)
+        function openCategory(categoryKey, categoryTitle) {
+            document.getElementById('page-categories-list').style.display = 'none';
+            
+            const innerView = document.getElementById('page-inner-products');
+            innerView.style.display = 'block';
+            document.getElementById('current-category-name').textContent = categoryTitle;
+
+            const targetGrid = document.getElementById('products-render-target');
+            targetGrid.innerHTML = '';
+
+            const filteredItems = database.filter(x => x.cat === categoryKey);
+            filteredItems.forEach(item => {
+                targetGrid.innerHTML += `
+                    <div class="product-card">
+                        <div class="prod-img-box">
+                            <img src="img/${item.id}.jpg" onerror="this.src='${item.img}'">
+                        </div>
+                        <div class="prod-title">${item.name}</div>
+                        <div class="prod-price">${item.price.toFixed(3)} د.ك</div>
+                        <button class="add-to-cart-btn" onclick="pushToBasket(${item.id})">➕ إضافة للسلة</button>
+                    </div>
+                `;
+            });
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // العودة الفورية لقائمة الأقسام الرئيسية
+        function closeCategory() {
+            document.getElementById('page-inner-products').style.display = 'none';
+            document.getElementById('page-categories-list').style.display = 'block';
+        }
+
+        // تبديل أزرار استلام التوصيل العلوية
+        function switchOrderMode(mode) {
+            currentMode = mode;
+            document.getElementById('mode-del').classList.toggle('active', mode === 'delivery');
+            document.getElementById('mode-pick').classList.toggle('active', mode === 'pickup');
+            document.getElementById('mode-car').classList.toggle('active', mode === 'car');
+
+            const addressSection = document.getElementById('address-block-form');
+            const deliveryRowView = document.getElementById('row-delivery-fee');
+
+            if (mode === 'delivery') {
+                addressSection.style.display = 'block';
+                deliveryRowView.style.display = 'flex';
+            } else {
+                addressSection.style.display = 'none';
+                deliveryRowView.style.display = 'none';
+            }
+            recalcDeliveryPrice();
+        }
+
+        // حساب أسعار توصيل المندوب
+        function recalcDeliveryPrice() {
+            if (currentMode !== 'delivery') {
+                currentDeliveryFee = 0.000;
+            } else {
+                const regionText = document.getElementById('form-region').value.trim();
+                if (regionText.includes('الخالدية') || regionText.includes('الخالديه') || regionText.includes('خالدية')) {
+                    currentDeliveryFee = 0.250;
+                } else {
+                    currentDeliveryFee = 0.500;
+                }
+            }
+            document.getElementById('txt-delivery').textContent = currentDeliveryFee.toFixed(3);
+            recalcTotals();
+        }
+
+        function pushToBasket(id) {
+            const productObj = database.find(p => p.id === id);
+            currentCart.push(productObj);
+            document.getElementById('badge-count').textContent = currentCart.length;
+            
+            const badge = document.getElementById('badge-count');
+            badge.style.transform = 'scale(1.3)';
+            setTimeout(() => badge.style.transform = 'scale(1)', 200);
+        }
+
+        function popFromBasket(index) {
+            currentCart.splice(index, 1);
+            document.getElementById('badge-count').textContent = currentCart.length;
+            renderCartList();
+        }
+
+        function renderCartList() {
+            const wrapper = document.getElementById('cart-items-wrapper');
+            if (currentCart.length === 0) {
+                wrapper.innerHTML = `<p style="text-align:center; padding:20px; font-size:12px; color:var(--text-gray);">السلة فارغة حالياً، اختر أصنافك من القائمة.</p>`;
+                recalcTotals();
+                return;
+            }
+
+            wrapper.innerHTML = '';
+            currentCart.forEach((item, index) => {
+                wrapper.innerHTML += `
+                    <div class="cart-item-row">
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <span>${item.price.toFixed(3)} د.ك</span>
+                        </div>
+                        <div class="remove-btn" onclick="popFromBasket(${index})">❌</div>
+                    </div>
+                `;
+            });
+            recalcTotals();
+        }
+
+        function recalcTotals() {
+            let foodSum = 0;
+            currentCart.forEach(i => foodSum += i.price);
+            document.getElementById('txt-subtotal').textContent = foodSum.toFixed(3);
+            
+            let grandTotal = foodSum + (currentMode === 'delivery' ? currentDeliveryFee : 0);
+            document.getElementById('txt-total').textContent = grandTotal.toFixed(3);
+        }
+
+        function fireFinalOrder() {
+            const name = document.getElementById('form-name').value.trim();
+            const phone = document.getElementById('form-phone').value.trim();
+
+            if (!name || !phone) {
+                alert('فضلاً، اكتب الاسم ورقم الموبايل للتواصل معكم.');
+                return;
+            }
+            if (currentCart.length === 0) {
+                alert('سلتك فارغة! يرجى إضافة وجبات أولاً.');
+                return;
+            }
+
+            let textSummary = `✨ طلب جديد - فتوش الخالدية ✨\n👤 العميل: ${name}\n📞 هاتف: ${phone}\n`;
+            
+            if (currentMode === 'delivery') {
+                const reg = document.getElementById('form-region').value.trim();
+                const blk = document.getElementById('form-block').value.trim();
+                const str = document.getElementById('form-street').value.trim();
+                const hse = document.getElementById('form-house').value.trim();
+                if(!reg || !blk || !str || !hse) {
+                    alert('يرجى إدخال بيانات العنوان كاملة للتوصيل.');
+                    return;
+                }
+                textSummary += `🛵 نوع الطلب: توصيل للمنزل\n📍 العنوان: ${reg}، ق ${blk}، ش ${str}، م ${hse}\n`;
+            } else if(currentMode === 'pickup') {
+                textSummary += `🛍️ نوع الطلب: استلام من فرع الجمعية\n`;
+            } else {
+                textSummary += `🚗 نوع الطلب: استلام مباشر من السيارة\n`;
+            }
+
+            textSummary += `💰 الإجمالي: ${document.getElementById('txt-total').textContent} د.ك`;
+            alert(`شكراً لك يا ${name}!\nتم تسجيل طلبك كاش بنجاح.\n\n` + textSummary);
+        }
+    </script>
+</body>
+</html>
