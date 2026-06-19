@@ -13,7 +13,7 @@
             --primary-color: #2ecc71;
             --accent-color: #ff9f43;
             --dark-color: #1a1a1a;    
-            --bg-color: #dcedda; /* تم تعديل الأرضية للون أخضر فاتح وواضح */
+            --bg-color: #dcedda; /* أرضية بلون أخضر فاتح ناعم */
             --white: #ffffff;
             --border-color: #bcdcb9;
         }
@@ -54,60 +54,83 @@
 
         header h1 { font-size: 24px; font-weight: 700; color: var(--accent-color); margin-bottom: 4px; }
         header p { font-size: 13px; opacity: 0.9; margin-bottom: 8px; color: #e0e0e0; }
+        
         header .phones { 
-            font-size: 15px; 
+            font-size: 16px; 
             font-weight: 700; 
-            color: #ff9f43; /* تم تغيير لون أرقام الهاتف للبرتقالي الذهبي الواضح */
+            color: #ff9f43 !important; /* تثبيت اللون البرتقالي الذهبي المضيء للأرقام */
             background: rgba(255,255,255,0.1); 
             display: inline-block; 
             padding: 6px 14px; 
             border-radius: 20px; 
             direction: ltr; 
-            border: 1px solid rgba(255, 159, 67, 0.3);
-        }
-
-        .categories-nav {
-            display: flex;
-            justify-content: flex-start;
-            gap: 8px;
-            margin: 20px 0;
-            overflow-x: auto;
-            padding: 5px 15px;
-            scrollbar-width: none;
-        }
-        .categories-nav::-webkit-scrollbar { display: none; }
-
-        .category-btn {
-            background-color: var(--white);
-            color: var(--dark-color);
-            border: 1px solid var(--border-color);
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-        }
-        .category-btn.active, .category-btn:hover {
-            background-color: #27ae60;
-            color: var(--white);
-            border-color: #27ae60;
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+            border: 1px solid rgba(255, 159, 67, 0.4);
         }
 
         .container { padding: 0 15px; max-width: 1200px; margin: 0 auto; }
         
+        /* واجهة الأقسام الرئيسية */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .category-main-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            transition: all 0.2s ease;
+        }
+        .category-main-card:hover {
+            transform: translateY(-3px);
+            border-color: #27ae60;
+            box-shadow: 0 6px 15px rgba(39, 174, 96, 0.1);
+        }
+        .category-main-card .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .category-main-card .name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        /* زر العودة للأقسام */
+        .back-btn {
+            background-color: #1e3d2f;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 12px;
+            margin-bottom: 20px;
         }
 
+        /* كرت الصنف والصور */
         .product-card {
             background: var(--white);
             border-radius: 14px;
-            padding: 14px;
+            padding: 12px;
             box-shadow: 0 4px 10px rgba(39, 174, 96, 0.05);
             display: flex;
             flex-direction: column;
@@ -120,8 +143,17 @@
             box-shadow: 0 6px 15px rgba(39, 174, 96, 0.12);
         }
 
-        .product-name { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; color: #2c3e50; min-height: 40px; }
-        .product-price { color: #e67e22; font-weight: 700; font-size: 15px; margin-bottom: 12px; display: block; }
+        .product-img {
+            width: 100%;
+            height: 105px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            background-color: #f5f5f5;
+        }
+
+        .product-name { font-size: 14px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; color: #2c3e50; min-height: 40px; }
+        .product-price { color: #e67e22; font-weight: 700; font-size: 15px; margin-bottom: 10px; display: block; }
         
         .add-btn {
             background-color: #f4fbf4;
@@ -201,29 +233,53 @@
 <body>
 
     <header>
-        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADIAWgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usld3lV4eXpCx8TY29u3uFu46ex8fX53fX0f3h9f/e9f/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKShTA3ODk8NYOT4nWVEhYGVkmJY2NDI3ODk5SVlUX1dWGVlZWmdndmWlqa3uFtba3uNxdfX93Z6fe5Gf4eXm5vecn96fnqKjpKWmp6ipqrKztLW2t7i5usld3lV4eXpCx8TY29u3uFu56ex9f3f3h9f/aAAwDAQACEkJggg==" alt="شعار فتوش الخالدية" class="logo">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADIAWgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAARXAAECBAUGBgcFBAfAAQADAMUAXwMRBTIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usld3lV4eXpCx8TY29u3uFu46ex8fX53fX0f3h9f/e9f/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKShTA3ODk8NYOT4nWVEhYGVkmJY2NDI3ODk5SVlUX1dWGVlZWmdndmWlqa3uFtba3uNxdfX93Z6fe5Gf4eXm5vecn96fnqKjpKWmp6ipqrKztLW2t7i5usld3lV4eXpCx8TY29u3uFu56ex9f3f3h9f/aAAwDAQAPIAGEYAsAAr... (تكملة الـ Base64 للشعار)" alt="شعار فتوش الخالدية" class="logo">
         <h1>🔥 فتوش الخالدية 🔥</h1>
         <p>أجود أنواع المشويات والمأكولات الطازجة</p>
         <div class="phones">24841390 - 24820520 - 96670801 - 96670802</div>
     </header>
 
-    <div class="categories-nav">
-        <button class="category-btn active" onclick="filterCategory('all', this)">كل الأصناف</button>
-        <button class="category-btn" onclick="filterCategory('hot_cold_sandwiches', this)">الساندويتشات الحارة والباردة</button>
-        <button class="category-btn" onclick="filterCategory('saj_sandwiches', this)">ساندويتشات الصاج</button>
-        <button class="category-btn" onclick="filterCategory('grills', this)">مشويات الخالدية</button>
-        <button class="category-btn" onclick="filterCategory('trays', this)">صواني مشويات</button>
-        <button class="category-btn" onclick="filterCategory('plates', this)">مواعين الخالدية</button>
-        <button class="category-btn" onclick="filterCategory('breakfast', this)">افطار الخالدية</button>
-    </div>
-
     <div class="container">
-        <div class="menu-grid" id="menu-products"></div>
+        
+        <div id="categories-page">
+            <div class="categories-grid">
+                <div class="category-main-card" onclick="showProductsPage('hot_cold_sandwiches', 'الساندويتشات الحارة والباردة')">
+                    <span class="icon">🥪</span>
+                    <span class="name">الساندويتشات الحارة والباردة</span>
+                </div>
+                <div class="category-main-card" onclick="showProductsPage('saj_sandwiches', 'ساندويتشات الصاج')">
+                    <span class="icon">🫓</span>
+                    <span class="name">ساندويتشات الصاج</span>
+                </div>
+                <div class="category-main-card" onclick="showProductsPage('grills', 'مشويات الخالدية')">
+                    <span class="icon">🍢</span>
+                    <span class="name">مشويات الخالدية</span>
+                </div>
+                <div class="category-main-card" onclick="showProductsPage('trays', 'صواني مشويات')">
+                    <span class="icon">🥘</span>
+                    <span class="name">صواني مشويات</span>
+                </div>
+                <div class="category-main-card" onclick="showProductsPage('plates', 'مواعين الخالدية')">
+                    <span class="icon">🍽️</span>
+                    <span class="name">مواعين الخالدية</span>
+                </div>
+                <div class="category-main-card" onclick="showProductsPage('breakfast', 'افطار الخالدية والمقبلات')">
+                    <span class="icon">🍳</span>
+                    <span class="name">افطار الخالدية والمقبلات</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="products-page" style="display: none;">
+            <button class="back-btn" onclick="showCategoriesPage()">◀ عودة للأقسام الرئيسية</button>
+            <h2 id="category-title" style="margin: 10px 0 20px 0; color: #1e3d2f; border-right: 4px solid #27ae60; padding-right: 8px;">اسم القسم</h2>
+            <div class="menu-grid" id="menu-products"></div>
+        </div>
 
         <div class="checkout-container">
             <h2>🛒 الأصناف المختارة</h2>
             <div id="cart-list">
-                <p style="color: #7f8c8d; text-align: center; padding: 15px;">السلة فارغة حالياً.. اضغط "إضافة" لتجهيزطلبك</p>
+                <p style="color: #7f8c8d; text-align: center; padding: 15px;">السلة فارغة حالياً.. اختر قسماً بالاعلى وأضف طلباتك</p>
             </div>
             
             <div class="total-box">
@@ -391,26 +447,39 @@
 
         let cart = [];
 
-        function renderMenu(categoryFilter = 'all') {
+        // تنقل الصفحات والدخول للأقسام
+        function showCategoriesPage() {
+            document.getElementById('categories-page').style.display = 'block';
+            document.getElementById('products-page').style.display = 'none';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function showProductsPage(category, categoryName) {
+            document.getElementById('categories-page').style.display = 'none';
+            document.getElementById('products-page').style.display = 'block';
+            document.getElementById('category-title').textContent = categoryName;
+            renderMenu(category);
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function renderMenu(categoryFilter) {
             const menuGrid = document.getElementById('menu-products');
             menuGrid.innerHTML = '';
-            const filtered = categoryFilter === 'all' ? products : products.filter(p => p.category === categoryFilter);
+            const filtered = products.filter(p => p.category === categoryFilter);
 
             filtered.forEach(p => {
+                // الكود بيبحث تلقائياً داخل مجلد img عن رقم الصنف، مع أمان عدم تعليق الواجهة في حال فقدان الصورة
+                const imgSrc = 'img/' + p.id + '.jpg';
+                
                 menuGrid.innerHTML += `
                     <div class="product-card">
+                        <img src="` + imgSrc + `" class="product-img" onerror="this.style.display='none'">
                         <span class="product-name">` + p.name + `</span>
                         <span class="product-price">` + p.price.toFixed(3) + ` د.ك</span>
                         <button class="add-btn" onclick="addToCart(` + p.id + `)">➕ إضافة للطلب</button>
                     </div>
                 `;
             });
-        }
-
-        function filterCategory(category, element) {
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
-            renderMenu(category);
         }
 
         function addToCart(id) {
@@ -429,7 +498,7 @@
             const cartTotal = document.getElementById('cart-total');
             
             if (cart.length === 0) {
-                cartList.innerHTML = '<p style="color: #7f8c8d; text-align: center; padding: 15px;">السلة فارغة حالياً.. اضغط "إضافة" لتجهيز طلبك</p>';
+                cartList.innerHTML = '<p style="color: #7f8c8d; text-align: center; padding: 15px;">السلة فارغة حالياً.. اختر قسماً بالاعلى وأضف طلباتك</p>';
                 cartTotal.textContent = '0.000';
                 return;
             }
@@ -472,15 +541,12 @@
                 return;
             }
 
-            // تجميع تفاصيل العنوان للرسالة
             let addressDetails = "المنطقة: " + region + " - ق: " + block + " - ش: " + street + " - م: " + house;
             if (floor) addressDetails += " - الدور: " + floor;
             if (flat) addressDetails += " - شقة: " + flat;
 
             alert('مرحباً ' + name + '! تم استلام طلبك لـ مطعم فتوش الخالدية بنجاح بنظام الكاش.\n\n📍 عنوان التوصيل:\n' + addressDetails);
         }
-
-        renderMenu();
     </script>
 </body>
 </html>
