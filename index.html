@@ -13,7 +13,7 @@
             --primary-color: #2ecc71;
             --accent-color: #ff9f43;
             --dark-color: #1a1a1a;    
-            --bg-color: #dcedda; /* أرضية بلون أخضر فاتح ناعم ومريح */
+            --bg-color: #dcedda; 
             --white: #ffffff;
             --border-color: #bcdcb9;
             --main-green: #1b4d3e;
@@ -32,7 +32,6 @@
             padding-bottom: 60px;
         }
 
-        /* هيدر احترافي بلون أخضر ملكي */
         header {
             background: linear-gradient(135deg, #1b4d3e, #27ae60);
             color: var(--white);
@@ -57,7 +56,6 @@
         header h1 { font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         header p { font-size: 13px; opacity: 0.95; margin-bottom: 12px; color: #e8f5e9; }
         
-        /* كبسولة أرقام الهاتف الواضحة جداً */
         header .phones { 
             font-size: 16px; 
             font-weight: 700; 
@@ -73,65 +71,113 @@
 
         .container { padding: 0 15px; max-width: 1200px; margin: 0 auto; }
         
-        /* شبكة الأقسام الرئيسية */
+        /* شبكة الأقسام وتصميمها الفخم مثل ستايل التطبيقات الحديثة */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
             margin: 25px 0;
         }
 
         .category-main-card {
+            position: relative;
+            height: 155px;
             background: var(--white);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
+            border-radius: 20px; /* انحناء زوايا فخم ومودرن */
             overflow: hidden;
-            text-align: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             transition: all 0.25s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .category-main-card:hover {
-            transform: translateY(-4px);
-            border-color: #27ae60;
-            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.15);
+            border: none;
         }
         
-        /* ضبط حجم صور الأقسام لتكون متطابقة تماماً مع الأيقونات */
+        .category-main-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 22px rgba(27, 77, 62, 0.2);
+        }
+        
         .category-card-img {
             width: 100%;
-            height: 135px;
+            height: 100%;
             object-fit: cover;
+            display: block;
         }
 
-        /* تعديل لون وشكل صندوق الأيقونة البديلة للأقسام بلون ذهبي دافئ ومميز */
-        .category-fallback-box {
+        /* طبقة ظل متدرجة غامقة أسفل الصورة لضمان وضوح النص الأبيض تماماً */
+        .category-main-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            height: 135px;
+            height: 65%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
+            z-index: 1;
+        }
+
+        /* حاوية الأيقونة البديلة للأقسام بنفس تدرج كنتاكي الفخم */
+        .category-fallback-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
+            font-size: 52px;
             background: linear-gradient(135deg, #fff9db, #ffe3a8);
-            border-bottom: 1px solid #f3e5c8;
+            z-index: 0;
         }
 
         .category-main-card .name-container {
-            padding: 12px 8px;
-            background: #ffffff;
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            left: 14px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            z-index: 2; /* فوق طبقة الظل */
+            text-align: right;
+            line-height: 1.3;
+        }
+
+        /* كبسولة اختيار نوع الطلب (توصيل / استلام) */
+        .order-type-container {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+            border-radius: 30px;
+            display: flex;
+            gap: 5px;
+            margin: 15px 0 20px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .toggle-btn {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            border-radius: 25px;
             font-size: 14px;
             font-weight: 700;
-            color: #2c3e50;
-            flex-grow: 1;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: transparent;
+            color: #555;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-top: 1px solid #f2f9f2;
+            gap: 6px;
         }
 
-        /* زر العودة للأقسام */
+        .toggle-btn.active {
+            background: #1b4d3e;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(27, 77, 62, 0.25);
+        }
+
         .back-btn {
             background-color: #1b4d3e;
             color: white;
@@ -142,7 +188,7 @@
             font-weight: 600;
             cursor: pointer;
             margin-top: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             display: inline-block;
             box-shadow: 0 4px 8px rgba(39, 174, 96, 0.2);
             transition: 0.2s;
@@ -156,7 +202,6 @@
             margin-bottom: 20px;
         }
 
-        /* كروت الأصناف المتناسقة */
         .product-card {
             background: var(--white);
             border-radius: 14px;
@@ -173,7 +218,6 @@
             box-shadow: 0 6px 15px rgba(39, 174, 96, 0.12);
         }
 
-        /* حاوية صور الأصناف لضمان الحفاظ على الهيكل حتى لو الصورة مفقودة */
         .product-img-container {
             width: 100%;
             height: 110px;
@@ -190,7 +234,6 @@
             object-fit: cover;
         }
 
-        /* صندوق الأيقونة البديلة الفخم للأصناف عند عدم وجود صوره لها */
         .product-fallback-box {
             position: absolute;
             top: 0;
@@ -243,12 +286,29 @@
         }
         .remove-item { color: #e74c3c; cursor: pointer; font-weight: bold; margin-right: 10px; }
 
+        /* حاوية تفصيل الحسابات والفواتير */
+        .bill-summary-box {
+            background-color: #fafdfa;
+            border-radius: 12px;
+            padding: 14px;
+            margin: 20px 0;
+            border: 1px dashed var(--border-color);
+        }
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+        }
         .total-box {
             display: flex;
             justify-content: space-between;
             font-weight: 700;
             font-size: 18px;
-            margin: 20px 0;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0eae0;
             color: #e67e22;
         }
 
@@ -339,6 +399,12 @@
 
         <div id="products-page" style="display: none;">
             <button class="back-btn" onclick="showCategoriesPage()">◀ عودة للأقسام الرئيسية</button>
+            
+            <div class="order-type-container">
+                <button type="button" id="type-delivery" class="toggle-btn active" onclick="setOrderType('delivery')">🛵 توصيل للمنزل</button>
+                <button type="button" id="type-pickup" class="toggle-btn" onclick="setOrderType('pickup')">🛍️ استلام من المطعم</button>
+            </div>
+
             <h2 id="category-title" style="margin: 10px 0 20px 0; color: #1b4d3e; border-right: 4px solid #27ae60; padding-right: 8px;">اسم القسم</h2>
             <div class="menu-grid" id="menu-products"></div>
         </div>
@@ -349,12 +415,22 @@
                 <p style="color: #7f8c8d; text-align: center; padding: 15px;">السلة فارغة حالياً.. اختر قسماً بالاعلى وأضف طلباتك</p>
             </div>
             
-            <div class="total-box">
-                <span>الإجمالي العام:</span>
-                <span><span id="cart-total">0.000</span> د.ك</span>
+            <div class="bill-summary-box">
+                <div class="bill-row">
+                    <span>مجموع الأصناف:</span>
+                    <span><span id="cart-subtotal">0.000</span> د.ك</span>
+                </div>
+                <div class="bill-row" id="delivery-row-view">
+                    <span>رسوم التوصيل:</span>
+                    <span><span id="delivery-fee-amount">0.500</span> د.ك</span>
+                </div>
+                <div class="total-box">
+                    <span>الإجمالي النهائي:</span>
+                    <span><span id="cart-total">0.000</span> د.ك</span>
+                </div>
             </div>
 
-            <h2>📋 بيانات الطلب والتوصيل</h2>
+            <h2>📋 بيانات الطلب</h2>
             <div class="form-group">
                 <label>الاسم بالكامل</label>
                 <input type="text" id="cust-name" class="form-control" placeholder="اكتب اسمك الكريم">
@@ -364,36 +440,38 @@
                 <input type="text" id="cust-phone" class="form-control" placeholder="أدخل رقم هاتفك">
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label>اسم المنطقة</label>
-                    <input type="text" id="cust-region" class="form-control" placeholder="مثال: الخالدية">
+            <div id="address-fields-container">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>اسم المنطقة</label>
+                        <input type="text" id="cust-region" class="form-control" placeholder="مثال: الخالدية" oninput="updateDeliveryFee()">
+                    </div>
+                    <div class="form-group">
+                        <label>القطعة</label>
+                        <input type="text" id="cust-block" class="form-control" placeholder="مثال: 3">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>القطعة</label>
-                    <input type="text" id="cust-block" class="form-control" placeholder="مثال: 3">
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label>الشارع</label>
-                    <input type="text" id="cust-street" class="form-control" placeholder="اسم أو رقم الشارع">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>الشارع</label>
+                        <input type="text" id="cust-street" class="form-control" placeholder="اسم أو رقم الشارع">
+                    </div>
+                    <div class="form-group">
+                        <label>المنزل</label>
+                        <input type="text" id="cust-house" class="form-control" placeholder="رقم المنزل">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>المنزل</label>
-                    <input type="text" id="cust-house" class="form-control" placeholder="رقم المنزل">
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label>رقم الدور (اختياري)</label>
-                    <input type="text" id="cust-floor" class="form-control" placeholder="مثال: الأرضي / الأول">
-                </div>
-                <div class="form-group">
-                    <label>رقم الشقة (اختياري)</label>
-                    <input type="text" id="cust-flat" class="form-control" placeholder="رقم الشقة">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>رقم الدور (اختياري)</label>
+                        <input type="text" id="cust-floor" class="form-control" placeholder="مثال: الأرضي / الأول">
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الشقة (اختياري)</label>
+                        <input type="text" id="cust-flat" class="form-control" placeholder="رقم الشقة">
+                    </div>
                 </div>
             </div>
 
@@ -513,6 +591,8 @@
         ];
 
         let cart = [];
+        let orderType = 'delivery'; // الخيار الافتراضي هو توصيل
+        let deliveryFee = 0.500;    // السعر الافتراضي للمناطق الاخرى
 
         function showCategoriesPage() {
             document.getElementById('categories-page').style.display = 'block';
@@ -528,7 +608,43 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // دالة ذكية لتحديد الأيقونة المناسبة لكل صنف عند عدم توفر صورته
+        // دالة تبديل نوع الطلب (توصيل أو استلام)
+        function setOrderType(type) {
+            orderType = type;
+            document.getElementById('type-delivery').classList.toggle('active', type === 'delivery');
+            document.getElementById('type-pickup').classList.toggle('active', type === 'pickup');
+            
+            const addressFields = document.getElementById('address-fields-container');
+            const deliveryRowView = document.getElementById('delivery-row-view');
+
+            if (type === 'pickup') {
+                addressFields.style.display = 'none';
+                deliveryRowView.style.display = 'none';
+            } else {
+                addressFields.style.display = 'block';
+                deliveryRowView.style.display = 'flex';
+            }
+            updateDeliveryFee();
+        }
+
+        // دالة فحص المنطقة وتعديل رسوم التوصيل تلقائياً وفوراً
+        function updateDeliveryFee() {
+            if (orderType === 'pickup') {
+                deliveryFee = 0.000;
+            } else {
+                const regionValue = document.getElementById('cust-region').value.trim();
+                // التحقق من وجود كلمة الخالدية بمختلف طرق كتابتها (ة / هـ)
+                if (regionValue.includes('الخالدية') || regionValue.includes('الخالديه') || regionValue.includes('خالدية') || regionValue.includes('خالديه')) {
+                    deliveryFee = 0.250;
+                } else {
+                    deliveryFee = 0.500;
+                }
+            }
+            
+            document.getElementById('delivery-fee-amount').textContent = deliveryFee.toFixed(3);
+            updateCart();
+        }
+
         function getFallbackEmoji(category) {
             switch(category) {
                 case 'hot_cold_sandwiches': return '🥪';
@@ -541,7 +657,6 @@
             }
         }
 
-        // عرض الأصناف مع تطبيق نظام الأيقونات البديلة الذكي لحل مشكلة الصور المفقودة
         function renderMenu(categoryFilter) {
             const menuGrid = document.getElementById('menu-products');
             menuGrid.innerHTML = '';
@@ -579,19 +694,21 @@
 
         function updateCart() {
             const cartList = document.getElementById('cart-list');
+            const cartSubtotal = document.getElementById('cart-subtotal');
             const cartTotal = document.getElementById('cart-total');
             
             if (cart.length === 0) {
                 cartList.innerHTML = '<p style="color: #7f8c8d; text-align: center; padding: 15px;">السلة فارغة حالياً.. اختر قسماً بالاعلى وأضف طلباتك</p>';
+                cartSubtotal.textContent = '0.000';
                 cartTotal.textContent = '0.000';
                 return;
             }
 
             cartList.innerHTML = '';
-            let total = 0;
+            let subtotal = 0;
 
             cart.forEach((item, index) => {
-                total += item.price;
+                subtotal += item.price;
                 cartList.innerHTML += `
                     <div class="cart-item">
                         <span>` + item.name + `</span>
@@ -603,21 +720,17 @@
                 `;
             });
 
-            cartTotal.textContent = total.toFixed(3);
+            cartSubtotal.textContent = subtotal.toFixed(3);
+            let totalWithDelivery = subtotal + deliveryFee;
+            cartTotal.textContent = totalWithDelivery.toFixed(3);
         }
 
         function submitOrder() {
             const name = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
-            const region = document.getElementById('cust-region').value.trim();
-            const block = document.getElementById('cust-block').value.trim();
-            const street = document.getElementById('cust-street').value.trim();
-            const house = document.getElementById('cust-house').value.trim();
-            const floor = document.getElementById('cust-floor').value.trim();
-            const flat = document.getElementById('cust-flat').value.trim();
 
-            if (!name || !phone || !region || !block || !street || !house) {
-                alert('فضلاً، أكمل الاسم ورقم الهاتف وعنوان التوصيل الأساسي (المنطقة، القطعة، الشارع، المنزل).');
+            if (!name || !phone) {
+                alert('فضلاً، أكمل الاسم ورقم الهاتف.');
                 return;
             }
             if (cart.length === 0) {
@@ -625,11 +738,30 @@
                 return;
             }
 
-            let addressDetails = "المنطقة: " + region + " - ق: " + block + " - ش: " + street + " - م: " + house;
-            if (floor) addressDetails += " - الدور: " + floor;
-            if (flat) addressDetails += " - شقة: " + flat;
+            let orderDetailsText = "";
+            
+            if (orderType === 'delivery') {
+                const region = document.getElementById('cust-region').value.trim();
+                const block = document.getElementById('cust-block').value.trim();
+                const street = document.getElementById('cust-street').value.trim();
+                const house = document.getElementById('cust-house').value.trim();
+                const floor = document.getElementById('cust-floor').value.trim();
+                const flat = document.getElementById('cust-flat').value.trim();
 
-            alert('مرحباً ' + name + '! تم استلام طلبك لـ مطعم فتوش الخالدية بنجاح بنظام الكاش.\n\n📍 عنوان التوصيل:\n' + addressDetails);
+                if (!region || !block || !street || !house) {
+                    alert('فضلاً، أكمل عنوان التوصيل الأساسي (المنطقة، القطعة، الشارع، المنزل).');
+                    return;
+                }
+
+                orderDetailsText = "🛵 نوع الطلب: توصيل للمنزل\n📍 العنوان -> المنطقة: " + region + " - ق: " + block + " - ش: " + street + " - م: " + house;
+                if (floor) orderDetailsText += " - الدور: " + floor;
+                if (flat) orderDetailsText += " - شقة: " + flat;
+                orderDetailsText += "\n💵 رسوم التوصيل: " + deliveryFee.toFixed(3) + " د.ك";
+            } else {
+                orderDetailsText = "🛍️ نوع الطلب: استلام مباشر من المطعم";
+            }
+
+            alert('مرحباً ' + name + '! تم استلام طلبك لـ مطعم فتوش الخالدية بنجاح بنظام الكاش.\n\n' + orderDetailsText + '\n💰 الإجمالي النهائي: ' + document.getElementById('cart-total').textContent + ' د.ك');
         }
     </script>
 </body>
