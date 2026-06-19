@@ -32,7 +32,7 @@
             padding-bottom: 60px;
         }
 
-        /* تعديل الهيدر بالكامل بلون أخضر ملكي فاخر وإلغاء الأسود */
+        /* هيدر احترافي بلون أخضر ملكي */
         header {
             background: linear-gradient(135deg, #1b4d3e, #27ae60);
             color: var(--white);
@@ -57,7 +57,7 @@
         header h1 { font-size: 24px; font-weight: 700; color: #ffffff; margin-bottom: 4px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         header p { font-size: 13px; opacity: 0.95; margin-bottom: 12px; color: #e8f5e9; }
         
-        /* جعل أرقام الهاتف في كبسولة بيضاء بارزة وواضحة جداً */
+        /* كبسولة أرقام الهاتف الواضحة جداً */
         header .phones { 
             font-size: 16px; 
             font-weight: 700; 
@@ -73,7 +73,7 @@
 
         .container { padding: 0 15px; max-width: 1200px; margin: 0 auto; }
         
-        /* تطوير واجهة الأقسام الرئيسية لتصبح احترافية وكبيرة */
+        /* شبكة الأقسام الرئيسية */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -99,23 +99,23 @@
             box-shadow: 0 8px 20px rgba(39, 174, 96, 0.15);
         }
         
-        /* صور الأقسام البانورامية الكبيرة الفخمة */
+        /* ضبط حجم صور الأقسام لتكون متطابقة تماماً مع الأيقونات */
         .category-card-img {
             width: 100%;
-            height: 120px;
+            height: 135px;
             object-fit: cover;
-            background-color: #f5f5f5;
         }
 
-        /* صندوق الأيقونة البديلة في حال عدم وجود صورة للقسم */
+        /* تعديل لون وشكل صندوق الأيقونة البديلة للأقسام بلون ذهبي دافئ ومميز */
         .category-fallback-box {
             width: 100%;
-            height: 120px;
+            height: 135px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 45px;
-            background: #f4fbf4;
+            font-size: 48px;
+            background: linear-gradient(135deg, #fff9db, #ffe3a8);
+            border-bottom: 1px solid #f3e5c8;
         }
 
         .category-main-card .name-container {
@@ -156,7 +156,7 @@
             margin-bottom: 20px;
         }
 
-        /* كروت الأصناف المحمية */
+        /* كروت الأصناف المتناسقة */
         .product-card {
             background: var(--white);
             border-radius: 14px;
@@ -173,13 +173,37 @@
             box-shadow: 0 6px 15px rgba(39, 174, 96, 0.12);
         }
 
+        /* حاوية صور الأصناف لضمان الحفاظ على الهيكل حتى لو الصورة مفقودة */
+        .product-img-container {
+            width: 100%;
+            height: 110px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            position: relative;
+            background-color: #f7f9f7;
+        }
+
         .product-img {
             width: 100%;
-            height: 105px;
+            height: 100%;
             object-fit: cover;
+        }
+
+        /* صندوق الأيقونة البديلة الفخم للأصناف عند عدم وجود صوره لها */
+        .product-fallback-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            background: linear-gradient(135deg, #f4fbf4, #e8f5e9);
+            border: 1px solid #c8e6c9;
             border-radius: 10px;
-            margin-bottom: 8px;
-            background-color: #f5f5f5;
         }
 
         .product-name { font-size: 14px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; color: #2c3e50; min-height: 40px; }
@@ -490,7 +514,6 @@
 
         let cart = [];
 
-        // التنقل بين الصفحات
         function showCategoriesPage() {
             document.getElementById('categories-page').style.display = 'block';
             document.getElementById('products-page').style.display = 'none';
@@ -505,18 +528,36 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // عرض الأصناف مع الحفاظ على أكواد مسار الصور لكل صنف بدقة
+        // دالة ذكية لتحديد الأيقونة المناسبة لكل صنف عند عدم توفر صورته
+        function getFallbackEmoji(category) {
+            switch(category) {
+                case 'hot_cold_sandwiches': return '🥪';
+                case 'saj_sandwiches': return '🫓';
+                case 'grills': return '🍢';
+                case 'trays': return '🥘';
+                case 'plates': return '🍽️';
+                case 'breakfast': return '🍳';
+                default: return '🍔';
+            }
+        }
+
+        // عرض الأصناف مع تطبيق نظام الأيقونات البديلة الذكي لحل مشكلة الصور المفقودة
         function renderMenu(categoryFilter) {
             const menuGrid = document.getElementById('menu-products');
             menuGrid.innerHTML = '';
             const filtered = products.filter(p => p.category === categoryFilter);
+            const fallbackEmoji = getFallbackEmoji(categoryFilter);
 
             filtered.forEach(p => {
                 const imgSrc = 'img/' + p.id + '.jpg';
+                const fallbackId = 'prod-fb-' + p.id;
                 
                 menuGrid.innerHTML += `
                     <div class="product-card">
-                        <img src="` + imgSrc + `" class="product-img" onerror="this.style.display='none'">
+                        <div class="product-img-container">
+                            <img src="` + imgSrc + `" class="product-img" onerror="this.style.display='none'; document.getElementById('` + fallbackId + `').style.display='flex';">
+                            <div id="` + fallbackId + `" class="product-fallback-box" style="display:none;">` + fallbackEmoji + `</div>
+                        </div>
                         <span class="product-name">` + p.name + `</span>
                         <span class="product-price">` + p.price.toFixed(3) + ` د.ك</span>
                         <button class="add-btn" onclick="addToCart(` + p.id + `)">➕ إضافة للطلب</button>
