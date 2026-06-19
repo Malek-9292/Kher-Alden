@@ -12,7 +12,7 @@
         :root {
             --kfc-red: #e41e26;
             --kfc-dark: #111111;
-            --bg-gray: #f3f4f6; /* نفس خلفية تطبيق كنتاكي المرفق */
+            --bg-gray: #f3f4f6; /* نفس خلفية التطبيق المرفق */
             --white: #ffffff;
             --text-muted: #6b7280;
         }
@@ -30,7 +30,7 @@
             padding-bottom: 40px;
         }
 
-        /* الهيدر الاحترافي */
+        /* الهيدر */
         header {
             background-color: var(--white);
             text-align: center;
@@ -64,7 +64,7 @@
 
         .container { padding: 0 12px; max-width: 768px; margin: 0 auto; }
         
-        /* قسم "استكشف القائمة" بنفس خط وتنسيق الصورة المرفقة */
+        /* عنوان استكشف القائمة */
         .section-title-container {
             display: flex;
             justify-content: space-between;
@@ -88,7 +88,7 @@
             border-radius: 2px;
         }
 
-        /* شبكة الأقسام المتطابقة مع الصورة (3 أعمدة وحجم متناسق) */
+        /* شبكة الأقسام (3 أعمدة متطابقة تماماً مع الحجم المرفق في الصورة) */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -99,9 +99,9 @@
         .category-kfc-card {
             position: relative;
             background: var(--white);
-            border-radius: 16px; /* زوايا دائرية ناعمة نفس الصورة */
+            border-radius: 16px;
             overflow: hidden;
-            aspect-ratio: 1 / 1.05; /* حجم مربع متناسق وجذاب */
+            aspect-ratio: 1 / 1.05;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.04);
             transition: transform 0.2s ease;
@@ -119,7 +119,7 @@
             display: block;
         }
 
-        /* غطاء تدرج داكن سفلي لضمان وضوح الكلمات تماماً */
+        /* غطاء تدرج داكن سفلي لضمان وضوح الكلمات */
         .category-kfc-card::after {
             content: '';
             position: absolute;
@@ -131,7 +131,6 @@
             z-index: 1;
         }
 
-        /* نصوص كروت الأقسام الدقيقة والمطابقة */
         .category-kfc-card .name-overlay {
             position: absolute;
             bottom: 8px;
@@ -146,7 +145,6 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
 
-        /* الأيقونات البديلة في حال عدم توفر صور الأقسام مؤقتاً */
         .category-fallback {
             position: absolute;
             top: 0;
@@ -161,7 +159,7 @@
             z-index: 0;
         }
 
-        /* كبسولة اختيار نوع الطلب الذكية */
+        /* كبسولة اختيار نوع الطلب أسفل زر العودة مباشرة */
         .order-type-container {
             background: var(--white);
             padding: 4px;
@@ -204,7 +202,7 @@
             display: inline-block;
         }
 
-        /* شبكة المنتجات داخل الأقسام */
+        /* شبكة المنتجات */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -250,13 +248,13 @@
         }
         .add-btn:hover { background-color: var(--kfc-red); color: white; }
 
-        /* سلة الفواتير والتشيك أوت */
+        /* سلة الطلبات */
         .checkout-container {
             margin-top: 25px;
             background: var(--white);
             border-radius: 16px;
             padding: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12 rgba(0,0,0,0.03);
             border: 1px solid #e5e7eb;
         }
         
@@ -439,7 +437,6 @@
     </div>
 
     <script>
-        // مصفوفة الوجبات المحدّثة والمنظمة
         const products = [
             // الساندويتشات
             { id: 1, name: 'ساندويش شاورما لحم', price: 0.650, category: 'hot_cold_sandwiches' },
@@ -462,176 +459,4 @@
             { id: 62, name: 'ماعون شاورما لحم صافي', price: 3.000, category: 'plates' },
             { id: 63, name: 'ماعون شاورما دجاج مميز', price: 3.000, category: 'plates' },
             // المقبلات والإفطار
-            { id: 70, name: 'ماعون مشكل مقالي ساخن', price: 1.000, category: 'breakfast' },
-            { id: 74, name: 'ماعون حمص كريمي فاخر', price: 0.750, category: 'breakfast' },
-            { id: 82, name: 'سلطة فتوش الخضراء طازجة', price: 1.000, category: 'breakfast' }
-        ];
-
-        let cart = [];
-        let orderType = 'delivery';
-        let deliveryFee = 0.500;
-
-        // دالة إظهار صفحة الأقسام الرئيسية
-        function showCategoriesPage() {
-            document.getElementById('categories-page').style.display = 'block';
-            document.getElementById('products-page').style.display = 'none';
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        // دالة الانتقال لصفحة المنتجات الخاصة بالقسم المختار
-        function showProductsPage(categoryKey, categoryTitleName) {
-            document.getElementById('categories-page').style.display = 'none';
-            document.getElementById('products-page').style.display = 'block';
-            document.getElementById('category-title').textContent = categoryTitleName;
-            renderMenuProducts(categoryKey);
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        // دالة تعيين نوع الطلب (توصيل أو استلام)
-        function setOrderType(type) {
-            orderType = type;
-            document.getElementById('type-delivery').classList.toggle('active', type === 'delivery');
-            document.getElementById('type-pickup').classList.toggle('active', type === 'pickup');
-            
-            const addressBox = document.getElementById('address-fields-container');
-            const deliveryRow = document.getElementById('delivery-row-view');
-
-            if (type === 'pickup') {
-                addressBox.style.display = 'none';
-                deliveryRow.style.display = 'none';
-            } else {
-                addressBox.style.display = 'block';
-                deliveryRow.style.display = 'flex';
-            }
-            updateDeliveryFee();
-        }
-
-        // السيستم الذكي لاحتساب أسعار التوصيل الفورية بناء على المنطقة
-        function updateDeliveryFee() {
-            if (orderType === 'pickup') {
-                deliveryFee = 0.000;
-            } else {
-                const regionInput = document.getElementById('cust-region').value.trim();
-                // الفحص الذكي للكلمة
-                if (regionInput.includes('الخالدية') || regionInput.includes('الخالديه') || regionInput.includes('خالدية') || regionInput.includes('خالديه')) {
-                    deliveryFee = 0.250;
-                } else {
-                    deliveryFee = 0.500;
-                }
-            }
-            document.getElementById('delivery-fee-amount').textContent = deliveryFee.toFixed(3);
-            updateCartUI();
-        }
-
-        function getCategoryEmoji(cat) {
-            if(cat === 'hot_cold_sandwiches') return '🥪';
-            if(cat === 'saj_sandwiches') return '🫓';
-            if(cat === 'grills') return '🍢';
-            if(cat === 'trays') return '🥘';
-            if(cat === 'plates') return '🍽️';
-            return '🍳';
-        }
-
-        // عرض وجبات القسم الحالي
-        function renderMenuProducts(filterKey) {
-            const grid = document.getElementById('menu-products');
-            grid.innerHTML = '';
-            const filteredItems = products.filter(item => item.category === filterKey);
-            const emo = getCategoryEmoji(filterKey);
-
-            filteredItems.forEach(item => {
-                const imgPath = 'img/' + item.id + '.jpg';
-                const fbId = 'p-fb-' + item.id;
-                grid.innerHTML += `
-                    <div class="product-card">
-                        <div class="product-img-container">
-                            <img src="` + imgPath + `" class="product-img" onerror="this.style.display='none'; document.getElementById('` + fbId + `').style.display='flex';">
-                            <div id="` + fbId + `" class="product-fallback" style="display:none; font-size:24px;">` + emo + `</div>
-                        </div>
-                        <div class="product-name">` + item.name + `</div>
-                        <div class="product-price">` + item.price.toFixed(3) + ` د.ك</div>
-                        <button class="add-btn" onclick="addToCart(` + item.id + `)">➕ إضافة</button>
-                    </div>
-                `;
-            });
-        }
-
-        function addToCart(id) {
-            const found = products.find(p => p.id === id);
-            cart.push(found);
-            updateCartUI();
-        }
-
-        function removeFromCart(idx) {
-            cart.splice(idx, 1);
-            updateCartUI();
-        }
-
-        // تحديث الحسابات والفاتورة الإجمالية
-        function updateCartUI() {
-            const list = document.getElementById('cart-list');
-            const subtotalSpan = document.getElementById('cart-subtotal');
-            const totalSpan = document.getElementById('cart-total');
-            
-            if (cart.length === 0) {
-                list.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 10px; font-size: 13px;">اضغط على أي قسم بالأعلى لتصفح الوجبات وإضافتها</p>';
-                subtotalSpan.textContent = '0.000';
-                totalSpan.textContent = '0.000';
-                return;
-            }
-
-            list.innerHTML = '';
-            let sum = 0;
-            cart.forEach((item, index) => {
-                sum += item.price;
-                list.innerHTML += `
-                    <div class="cart-item">
-                        <span>` + item.name + `</span>
-                        <div>
-                            <span style="font-weight:700; color:var(--kfc-red); margin-left:8px;">` + item.price.toFixed(3) + ` د.ك</span>
-                            <span class="remove-item" onclick="removeFromCart(` + index + `)">❌</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            subtotalSpan.textContent = sum.toFixed(3);
-            let finalSum = sum + deliveryFee;
-            totalSpan.textContent = finalSum.toFixed(3);
-        }
-
-        // إرسال الطلب النهائي بنجاح
-        function submitOrder() {
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
-
-            if (!name || !phone) {
-                alert('يرجى كتابة الاسم ورقم الهاتف لإتمام الطلب.');
-                return;
-            }
-            if (cart.length === 0) {
-                alert('سلتك فارغة! أضف بعض الوجبات اللذيذة أولاً.');
-                return;
-            }
-
-            let summaryMsg = "";
-            if (orderType === 'delivery') {
-                const reg = document.getElementById('cust-region').value.trim();
-                const blk = document.getElementById('cust-block').value.trim();
-                const str = document.getElementById('cust-street').value.trim();
-                const hse = document.getElementById('cust-house').value.trim();
-
-                if (!reg || !blk || !str || !hse) {
-                    alert('يرجى ملء بيانات العنوان (المنطقة، القطعة، الشارع، المنزل).');
-                    return;
-                }
-                summaryMsg = "🛵 نوع الطلب: توصيل للمنزل\n📍 العنوان: " + reg + "، ق " + blk + "، ش " + str + "، م " + hse + "\n💵 رسوم التوصيل المضافة: " + deliveryFee.toFixed(3) + " د.ك";
-            } else {
-                summaryMsg = "🛍️ نوع الطلب: استلام مباشر من المطعم";
-            }
-
-            alert('شكراً لك ' + name + '!\nتم تسجيل طلبك كاش بنجاح في نظام مطعم فتوش الخالدية.\n\n' + summaryMsg + '\n💰 الإجمالي النهائي المطلوب: ' + document.getElementById('cart-total').textContent + ' د.ك');
-        }
-    </script>
-</body>
-</html>
+            { id: 70, name: 'ماعون مشكل مقالي ساخن', price: 1.000, category
