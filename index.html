@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منيو فتوش الخالدية الرقمي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --accent-color: #ff9f43;
+            --dark-color: #1a1a1a;    
+            --bg-color: #eef7ed;
+            --white: #ffffff;
+            --border-color: #d0e7cf;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--dark-color);
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3d2f, #121212);
+            color: var(--white);
+            text-align: center;
+            padding: 25px 15px;
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header .logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: white;
+            padding: 4px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            object-fit: contain;
+        }
+
+        header h1 { font-size: 24px; font-weight: 700; color: var(--accent-color); margin-bottom: 4px; }
+        header p { font-size: 13px; opacity: 0.9; margin-bottom: 8px; color: #e0e0e0; }
+        header .phones { font-size: 14px; font-weight: 700; color: #fff; background: rgba(255,255,255,0.15); display: inline-block; padding: 4px 12px; border-radius: 20px; direction: ltr; }
+
+        .categories-nav {
+            display: flex;
+            justify-content: flex-start;
+            gap: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            padding: 5px 15px;
+            scrollbar-width: none;
+        }
+        .categories-nav::-webkit-scrollbar { display: none; }
+
+        .category-btn {
+            background-color: var(--white);
+            color: var(--dark-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .category-btn.active, .category-btn:hover {
+            background-color: #27ae60;
+            color: var(--white);
+            border-color: #27ae60;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+        }
+
+        .container { padding: 0 15px; max-width: 1200px; margin: 0 auto; }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .product-card:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(39, 174, 96, 0.12);
+        }
+
+        .product-name { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; color: #2c3e50; min-height: 40px; }
+        .product-price { color: #e67e22; font-weight: 700; font-size: 15px; margin-bottom: 12px; display: block; }
+        
+        .add-btn {
+            background-color: #f4fbf4;
+            color: var(--dark-color);
+            border: 1px solid #c8e6c9;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            width: 100%;
+            transition: 0.2s;
+        }
+        .add-btn:hover { background-color: #27ae60; color: white; border-color: #27ae60; }
+
+        .checkout-container {
+            margin-top: 30px;
+            background: var(--white);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        .checkout-container h2 { font-size: 16px; margin-bottom: 15px; border-bottom: 2px solid var(--bg-color); padding-bottom: 8px; color: #2c3e50; }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 14px;
+        }
+        .remove-item { color: #e74c3c; cursor: pointer; font-weight: bold; margin-right: 10px; }
+
+        .total-box {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 20px 0;
+            color: #e67e22;
+        }
+
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 600; color: #555; }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+            background-color: #fafdfa;
+        }
+        .form-control:focus { border-color: #27ae60; background-color: #fff; }
+
+        .submit-order-btn {
+            width: 100%;
+            background: #27ae60;
+            color: var(--white);
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.25);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADIAWgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usld3lV4eXpCx8TY29u3uFu46ex8fX53fX0f3h9f/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKShTA3ODk8NYOT4nWVEhYGVkmJY2NDI3ODk5SVlUX1dWGVlZWmdndmWlqa3uFtba3uNxdfX93Z6fe5Gf4eXm5vecn96fnqKjpKWmp6ipqrKztLW2t7i5usld3lV4eXpCx8TY29u3uFu56ex9f3f3h9f/aAAwDAQACEkJggg==" alt="شعار فتوش الخالدية" class="logo">
+        <h1>🔥 فتوش الخالدية 🔥</h1>
+        <p>أجود أنواع المشويات والمأكولات الطازجة</p>
+        <div class="phones">24841390 - 24820520 - 96670801 - 96670802</div>
+    </header>
+
+    <div class="categories-nav">
+        <button class="category-btn active" onclick="filterCategory('all', this)">كل الأصناف</button>
+        <button class="category-btn" onclick="filterCategory('hot_cold_sandwiches', this)">الساندويتشات الحارة والباردة</button>
+        <button class="category-btn" onclick="filterCategory('saj_sandwiches', this)">ساندويتشات الصاج</button>
+        <button class="category-btn" onclick="filterCategory('grills', this)">مشويات الخالدية</button>
+        <button class="category-btn" onclick="filterCategory('trays', this)">صواني مشويات</button>
+        <button class="category-btn" onclick="filterCategory('plates', this)">مواعين الخالدية</button>
+        <button class="category-btn" onclick="filterCategory('breakfast', this)">افطار الخالدية</button>
+    </div>
+
+    <div class="container">
+        <div class="menu-grid" id="menu-products"></div>
+
+        <div class="checkout-container">
+            <h2>🛒 الأصناف المختارة</h2>
+            <div id="cart-list">
+                <p style="color: #7f8c8d; text-align: center; padding: 15px;">السلة فارغة حالياً.. اضغط "إضافة" لتجهيز طلبك</p>
+            </div>
+            
+            <div class="total-box">
+                <span>الإجمالي العام:</span>
+                <span><span id="cart-total">0.000</span> د.ك</span>
+            </div>
+
+            <h2>📋 بيانات الطلب والتوصيل</h2>
+            <div class="form-group">
+                <label>الاسم بالكامل</label>
+                <input type="text" id="cust-name" class="form-control" placeholder="اكتب اسمك الكريم">
+            </div>
+            <div class="form-group">
+                <label>رقم الهاتف فقط</label>
+                <input type="text" id="cust-phone" class="form-control" placeholder="أدخل رقم هاتفك">
+            </div>
+
+            <button class="submit-order-btn" onclick="submitOrder()">🚀 إرسال الطلب مباشرة</button>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            // 1️⃣ قسم الساندويتشات الحارة والباردة
+            { id: 1, name: 'ساندويش شاورما لحم', price: 0.650, category: 'hot_cold_sandwiches' },
+            { id: 2, name: 'ساندويش شاورما دجاج', price: 0.650, category: 'hot_cold_sandwiches' },
+            { id: 3, name: 'ساندويش كباب مشوي', price: 0.600, category: 'hot_cold_sandwiches' },
+            { id: 4, name: 'ساندويش شيش طاووق', price: 0.600, category: 'hot_cold_sandwiches' },
+            { id: 5, name: 'كفتة بالصلصة ساندويش', price: 0.500, category: 'hot_cold_sandwiches' },
+            { id: 6, name: 'ساندويش كبدة دجاج', price: 0.400, category: 'hot_cold_sandwiches' },
+            { id: 7, name: 'تكا لحم بالبطاط ساندويش', price: 0.400, category: 'hot_cold_sandwiches' },
+            { id: 8, name: 'تكا دجاج بالاطاط ساندويش', price: 0.400, category: 'hot_cold_sandwiches' },
+            { id: 9, name: 'ساندويش مشروم صاج', price: 0.400, category: 'hot_cold_sandwiches' },
+            { id: 10, name: 'ساندويش مفروم + جبن', price: 0.500, category: 'hot_cold_sandwiches' },
+            { id: 11, name: 'ساندويش حلوم', price: 0.500, category: 'hot_cold_sandwiches' },
+            { id: 12, name: 'ساندويش طلياني', price: 0.600, category: 'hot_cold_sandwiches' },
+            { id: 13, name: 'ساندويش مسحب دجاج', price: 0.400, category: 'hot_cold_sandwiches' },
+            { id: 14, name: 'ساندويش مرتديلا', price: 0.400, category: 'hot_cold_sandwiches' },
+            { id: 15, name: 'ساندويش مرتديلا + جبن', price: 0.500, category: 'hot_cold_sandwiches' },
+            { id: 16, name: 'ساندويش مرتديلا + حلوم', price: 0.600, category: 'hot_cold_sandwiches' },
+            { id: 17, name: 'ساندويش نقانق', price: 0.400, category: 'hot_cold_sandwiches' },
+            { id: 18, name: 'ساندويش نقانق جبن', price: 0.500, category: 'hot_cold_sandwiches' },
+            { id: 19, name: 'ساندويش نقانق بيض', price: 0.400, category: 'hot_cold_sandwiches' },
+            { id: 20, name: 'ساندويش نقانق بيض جبن', price: 0.500, category: 'hot_cold_sandwiches' },
+            { id: 21, name: 'صمون لسان طازج', price: 0.600, category: 'hot_cold_sandwiches' },
+
+            // 2️⃣ قسم ساندويتشات الصاج
+            { id: 22, name: 'صاج فلافل مقرمش', price: 0.400, category: 'saj_sandwiches' },
+            { id: 23, name: 'صاج مشكل مقالي الخالدية', price: 0.400, category: 'saj_sandwiches' },
+            { id: 24, name: 'صاج شاورما دجاج', price: 0.650, category: 'saj_sandwiches' },
+            { id: 25, name: 'صاج شاورما لحم صافي', price: 0.650, category: 'saj_sandwiches' },
+            { id: 26, name: 'صاج كباب مشوي', price: 0.850, category: 'saj_sandwiches' },
+            { id: 27, name: 'صاج شيش طاووق فخم', price: 0.850, category: 'saj_sandwiches' },
+            { id: 28, name: 'صاج حلوم ساخن', price: 0.850, category: 'saj_sandwiches' },
+            { id: 29, name: 'صاج طلياني', price: 0.850, category: 'saj_sandwiches' },
+            { id: 30, name: 'صاج الأجبان بأنواعها', price: 0.750, category: 'saj_sandwiches' },
+            { id: 31, name: 'صاج مرتديلا وجبن', price: 0.750, category: 'saj_sandwiches' },
+            { id: 32, name: 'صاج مساح لسان مميز', price: 0.850, category: 'saj_sandwiches' },
+
+            // 3️⃣ قسم مشويات الخالدية
+            { id: 33, name: 'وجبة كباب لحم', price: 2.750, category: 'grills' },
+            { id: 34, name: 'وجبة كباب دجاج', price: 2.250, category: 'grills' },
+            { id: 35, name: 'وجبة كفتة بالشبك', price: 2.500, category: 'grills' },
+            { id: 36, name: 'وجبة مشويات', price: 3.000, category: 'grills' },
+            { id: 37, name: 'وجبة تكا', price: 3.000, category: 'grills' },
+            { id: 38, name: 'وجبة خشخاش', price: 3.000, category: 'grills' },
+            { id: 39, name: 'وجبة كباب فلسطيني', price: 2.500, category: 'grills' },
+            { id: 40, name: 'وجبة طاووق', price: 3.000, category: 'grills' },
+            { id: 41, name: 'وجبة دجاج ع الفحم', price: 3.000, category: 'grills' },
+            { id: 42, name: 'وجبة عرايس لحم', price: 2.250, category: 'grills' },
+            { id: 43, name: 'وجبة عرايس دجاج', price: 2.250, category: 'grills' },
+            { id: 44, name: 'وجبة عرايس لحم بالجبن', price: 2.000, category: 'grills' },
+            { id: 45, name: 'وجبة عرايس دجاج بالجبن', price: 1.750, category: 'grills' },
+            { id: 46, name: 'وجبة دجاج شواية', price: 2.500, category: 'grills' },
+            { id: 47, name: 'وجبة برياني دجاج', price: 2.750, category: 'grills' },
+            { id: 48, name: 'وجبة ريش لحم', price: 2.250, category: 'grills' },
+            { id: 49, name: 'وجبة عرايس لحم جبن كاملة', price: 2.500, category: 'grills' },
+
+            // 4️⃣ قسم صواني مشويات
+            { id: 50, name: 'صينية مشويات 3 أشخاص', price: 12.000, category: 'trays' },
+            { id: 51, name: 'صينية مشويات 4 أشخاص', price: 14.000, category: 'trays' },
+            { id: 52, name: 'صينية مشويات 5 أشخاص', price: 17.500, category: 'trays' },
+            { id: 53, name: 'صينية مشويات 6 أشخاص', price: 20.000, category: 'trays' },
+            { id: 54, name: 'صينية مشويات 8 أشخاص', price: 24.000, category: 'trays' },
+            { id: 55, name: 'صينية مشويات 10 أشخاص', price: 28.000, category: 'trays' },
+            { id: 56, name: 'وجبة استيك لحم عجل', price: 2.500, category: 'trays' },
+            { id: 57, name: 'نص دجاجة شواية بطاط', price: 1.500, category: 'trays' },
+            { id: 58, name: 'نص دجاج ع الفحم بطاط', price: 1.500, category: 'trays' },
+            { id: 59, name: 'نص برياني مع مرق', price: 1.250, category: 'trays' },
+            { id: 60, name: 'مجبوس دجاج برياني', price: 2.500, category: 'trays' },
+            { id: 61, name: 'ماعون كفتة بالمرق', price: 2.500, category: 'trays' },
+
+            // 5️⃣ قسم مواعين الخالدية
+            { id: 62, name: 'ماعون شاورما لحم', price: 3.000, category: 'plates' },
+            { id: 63, name: 'ماعون شاورما دجاج', price: 3.000, category: 'plates' },
+            { id: 64, name: 'ماعون شاورما لحم بالحمص', price: 3.500, category: 'plates' },
+            { id: 65, name: 'ماعون شاورما دجاج بالحمص', price: 3.500, category: 'plates' },
+            { id: 66, name: 'ماعون كبدة طازج', price: 2.500, category: 'plates' },
+            { id: 67, name: 'ماعون تكا لحم بالبطاط', price: 2.500, category: 'plates' },
+            { id: 68, name: 'ماعون تكا دجاج بالبطاط', price: 2.500, category: 'plates' },
+            { id: 69, name: 'ماعون مفروم غنم لحم', price: 2.000, category: 'plates' },
+
+            // 6️⃣ قسم افطار الخالدية والمقبلات والسلطات
+            { id: 70, name: 'ماعون مشكل مقالي', price: 1.000, category: 'breakfast' },
+            { id: 71, name: 'ماعون فول', price: 0.750, category: 'breakfast' },
+            { id: 72, name: 'ماعون مسقعة', price: 0.750, category: 'breakfast' },
+            { id: 73, name: 'ماعون قدسية', price: 0.750, category: 'breakfast' },
+            { id: 74, name: 'ماعون حمص', price: 0.750, category: 'breakfast' },
+            { id: 75, name: 'ماعون عجة', price: 1.500, category: 'breakfast' },
+            { id: 76, name: 'ماعون لبنة', price: 2.000, category: 'breakfast' },
+            { id: 77, name: 'ماعون أجبان', price: 3.000, category: 'breakfast' },
+            { id: 78, name: 'ماعون ترويقة', price: 6.500, category: 'breakfast' },
+            { id: 79, name: 'حمص وسط', price: 0.750, category: 'breakfast' },
+            { id: 80, name: 'حمص بيروتي', price: 0.750, category: 'breakfast' },
+            { id: 81, name: 'متبل وسط', price: 0.750, category: 'breakfast' },
+            { id: 82, name: 'فتوش', price: 1.000, category: 'breakfast' },
+            { id: 83, name: 'تبولة', price: 1.000, category: 'breakfast' },
+            { id: 84, name: 'ورق عنب', price: 1.500, category: 'breakfast' },
+            { id: 85, name: 'بابا غنوج', price: 1.250, category: 'breakfast' },
+            { id: 86, name: 'خيار باللبن', price: 1.250, category: 'breakfast' },
+            { id: 87, name: 'سلطة شمندر', price: 1.250, category: 'breakfast' },
+            { id: 88, name: 'سلطة ذرة', price: 1.250, category: 'breakfast' },
+            { id: 89, name: 'سلطة خضراء', price: 1.000, category: 'breakfast' },
+            { id: 90, name: 'سلطة يونانية', price: 1.250, category: 'breakfast' },
+            { id: 91, name: 'سلطة جرجير', price: 1.000, category: 'breakfast' },
+            { id: 92, name: 'ماعون شيبس وسط', price: 0.750, category: 'breakfast' },
+            { id: 93, name: 'ماعون ثوم وسط', price: 0.750, category: 'breakfast' },
+            { id: 94, name: 'ماعون حمص كبير', price: 1.500, category: 'breakfast' },
+            { id: 95, name: 'ماعون متبل كبير', price: 1.500, category: 'breakfast' },
+            { id: 96, name: 'ماعون شيبس كبير', price: 1.500, category: 'breakfast' }
+        ];
+
+        let cart = [];
+
+        function renderMenu(categoryFilter = 'all') {
+            const menuGrid = document.getElementById('menu-products');
+            menuGrid.innerHTML = '';
+            const filtered = categoryFilter === 'all' ? products : products.filter(p => p.category === categoryFilter);
+
+            filtered.forEach(p => {
+                menuGrid.innerHTML += `
+                    <div class="product-card">
+                        <span class="product-name">` + p.name + `</span>
+                        <span class="product-price">` + p.price.toFixed(3) + ` د.ك</span>
+                        <button class="add-btn" onclick="addToCart(` + p.id + `)">➕ إضافة للطلب</button>
+                    </div>
+                `;
+            });
+        }
+
+        function filterCategory(category, element) {
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            renderMenu(category);
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart-list');
+            const cartTotal = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                cartList.innerHTML = '<p style="color: #7f8c8d; text-align: center; padding: 15px;">السلة فارغة حالياً.. اضغط "إضافة" لتجهيز طلبك</p>';
+                cartTotal.textContent = '0.000';
+                return;
+            }
+
+            cartList.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartList.innerHTML += `
+                    <div class="cart-item">
+                        <span>` + item.name + `</span>
+                        <div>
+                            <span style="font-weight:700; margin-left: 10px; color:#e67e22;">` + item.price.toFixed(3) + ` د.ك</span>
+                            <span class="remove-item" onclick="removeFromCart(` + index + `)">❌</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartTotal.textContent = total.toFixed(3);
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+
+            if (!name || !phone) {
+                alert('فضلاً، أدخل الاسم ورقم الهاتف لتأكيد الطلب.');
+                return;
+            }
+            if (cart.length === 0) {
+                alert('سلتك فارغة! اختر الوجبات أولاً قبل الإرسال.');
+                return;
+            }
+
+            alert('مرحباً ' + name + '! تم استلام طلبك لـ مطعم فتوش الخالدية بنجاح بنظام الكاش.');
+        }
+
+        renderMenu();
+    </script>
+</body>
+</html>
